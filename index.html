@@ -253,6 +253,10 @@
   .qoq-table td:first-child { text-align:left;font-family:'DM Sans';font-size:12px;color:var(--text); }
   .qoq-table tr:last-child td { border-bottom:none; }
   .qoq-table .q4v { color:var(--muted); }
+
+  .delta-pos { color:#00c896;font-family:'DM Mono';font-size:11px;font-weight:600; }
+  .delta-neg { color:#ff4757;font-family:'DM Mono';font-size:11px;font-weight:600; }
+  .delta-flat{ color:#4f5a6e;font-family:'DM Mono';font-size:11px; }
   .qoq-table .q1v { color:var(--text);font-weight:500; }
   .trend-up   { color:var(--accent);font-size:14px;font-weight:700; }
   .trend-dn   { color:var(--danger);font-size:14px;font-weight:700; }
@@ -292,6 +296,7 @@
   <div class="nav-tab" onclick="showPage('marketing',this)">📣 Marketing OKRs</div>
   <div class="nav-tab" onclick="showPage('underwriting',this)">⚡ Underwriting OKRs</div>
   <div class="nav-tab" onclick="showPage('fieldops',this)">🔨 Field Ops OKRs</div>
+  <div class="nav-tab" onclick="showPage('alltime',this)">📈 All-Time</div>
 </div>
 
 <!-- ══════════════ PAGE: OVERVIEW ══════════════ -->
@@ -304,12 +309,12 @@
       <div class="cc"><div class="cc-lbl">Deals In</div><div class="cc-val" style="color:var(--text)">86</div><div class="cc-sub">To ARIP · target 100</div></div>
       <div class="cc"><div class="cc-lbl">Deals Out</div><div class="cc-val" style="color:var(--text)">61</div><div class="cc-sub">Through pipeline · target 70</div></div>
       <div class="cc"><div class="cc-lbl">Pull Through</div><div class="cc-val" style="color:var(--accent2)">70.93%</div><div class="cc-sub">61/86 · target 70% ✓</div></div>
-      <div class="cc"><div class="cc-lbl">Projected Out</div><div class="cc-val" style="color:var(--purple)">$2.59M</div><div class="cc-sub">$2,587,669.59</div></div>
+      <div class="cc"><div class="cc-lbl">Projected Out</div><div class="cc-val" style="color:var(--purple)">$2.59M</div><div class="cc-sub">$2,587,669.59 · <span style="color:var(--warn)">target $2.8M</span></div></div>
       <div class="cc"><div class="cc-lbl">Q2 Pipeline</div><div class="cc-val" style="color:var(--blue)">$1.35M</div><div class="cc-sub">$1,353,000 carried in</div></div>
     </div>
     <div class="g4">
       <div class="kcard g"><div class="kc-lbl">Revenue Closed (Actual)</div><div class="kc-val" style="color:var(--accent)">$1.22M</div><div class="kc-meta"><span class="kc-tgt">$1,223,011.64 · Target $1.1M</span><span class="chip chip-g">111% ✓</span></div><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--accent)"></div></div></div>
-      <div class="kcard y"><div class="kc-lbl">Average Fee Size</div><div class="kc-val" style="color:var(--accent2)">$37,061</div><div class="kc-meta"><span class="kc-tgt">Target &gt;$45K (UW OKR)</span><span class="chip chip-r">82% ✗</span></div><div class="bar-track"><div class="bar-fill" style="width:82%;background:var(--warn)"></div></div></div>
+      <div class="kcard y"><div class="kc-lbl">Average Fee Size</div><div class="kc-val" style="color:var(--accent2)">$37,061</div><div class="kc-meta"><span class="kc-tgt">Target &gt;$45K (UW OKR)</span><span class="chip chip-r">82% ✗</span></div><div style="font-size:10px;color:var(--muted);margin-top:5px;font-family:'DM Mono'">Median: <span style="color:var(--mid)">$25,931</span> &nbsp;·&nbsp; Mean skewed by large deals</div><div class="bar-track"><div class="bar-fill" style="width:82%;background:var(--warn)"></div></div></div>
       <div class="kcard w"><div class="kc-lbl">Deals Closed</div><div class="kc-val" style="color:var(--text)">33</div><div class="kc-meta"><span class="kc-tgt">13 same-qtr · 20 prior</span><span class="chip chip-w">Verified</span></div><div class="bar-track"><div class="bar-fill" style="width:85%;background:var(--warn)"></div></div></div>
       <div class="kcard g"><div class="kc-lbl">Contracts Sent</div><div class="kc-val" style="color:var(--accent)">402</div><div class="kc-meta"><span class="kc-tgt">Target 300</span><span class="chip chip-g">134% ✓</span></div><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--accent)"></div></div></div>
     </div>
@@ -388,12 +393,12 @@
           <div class="oi"><div class="oi-lbl">Rescheduled</div><div class="oi-val" style="color:var(--accent2)">145</div><div class="oi-pct">6.3%</div></div>
           <div class="oi"><div class="oi-lbl">Cancelled</div><div class="oi-val" style="color:var(--warn)">91</div><div class="oi-pct">4.0%</div></div>
           <div class="oi"><div class="oi-lbl">VP Missed</div><div class="oi-val" style="color:var(--danger)">21</div><div class="oi-pct">0.9%</div></div>
-          <div class="oi"><div class="oi-lbl">Att+No Show</div><div class="oi-val" style="color:var(--mid)">46</div><div class="oi-pct">2.0%</div></div>
+          <div class="oi"><div class="oi-lbl" style="font-size:8.5px;">Disposition Error ⚠</div><div class="oi-val" style="color:var(--mid)">46</div><div class="oi-pct" title="Records logged as both Attended and No Show simultaneously — conflicting disposition entries">Att+No Show conflict</div></div>
         </div>
         <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">
           <div class="trow"><div class="tr-name">Text / SMS Leads</div><div class="tr-val" style="color:var(--accent)">907</div><div class="chip chip-g">139% ✓</div></div>
           <div class="trow"><div class="tr-name">Call Center Leads</div><div class="tr-val" style="color:var(--danger)">1,043</div><div class="chip chip-r">40% ✗</div></div>
-          <div class="trow"><div class="tr-name">Marketing ARIPs</div><div class="tr-val" style="color:var(--accent)">23</div><div class="chip chip-g">vs 22 ✓</div></div>
+          <div class="trow"><div class="tr-name" title="Mktg lead → qualified opp → reached ARIP (signed contract). Q1 OKR: ≥22 ARIPs from core-market marketing sources">Mktg Lead → Opp → ARIP</div><div class="tr-val" style="color:var(--accent)">23</div><div class="chip chip-g">vs 22 goal ✓</div></div>
           <div class="trow"><div class="tr-name" style="color:var(--blue);">♻️ Revived Leads (DB re-engagement)</div><div class="tr-val" style="color:var(--blue)">364</div><div class="chip chip-b">37% → opp</div></div>
           <div class="trow"><div class="tr-name" style="color:var(--blue);">Revived → Opportunities</div><div class="tr-val" style="color:var(--accent)">+135</div><div class="chip chip-g">+12% opps</div></div>
         </div>
@@ -658,7 +663,40 @@
         <!-- INTERACTIVE SPOTLIGHT TILE -->
         <div id="src-spotlight" class="spotlight" style="margin-top:11px;border-radius:10px;padding:14px 16px;border:1px solid rgba(253,121,168,0.25);background:linear-gradient(135deg,rgba(253,121,168,0.07),rgba(253,121,168,0.02));"></div>
 
-        <script>
+        <!-- CORE MARKET TILE -->
+        <div style="margin-top:11px;background:linear-gradient(135deg,rgba(77,158,247,0.06),rgba(77,158,247,0.02));border:1px solid rgba(77,158,247,0.22);border-radius:10px;padding:14px 16px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+            <span style="font-size:14px;">🗺️</span>
+            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;font-weight:600;">Core Market Focus — Q1 2026</div>
+            <div style="margin-left:auto;font-size:10px;color:var(--muted);">Top 20 cities by all-time deal count</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px;">
+            <div style="text-align:center;background:var(--surface2);border-radius:7px;padding:10px 6px;">
+              <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Lead Concentration</div>
+              <div style="font-family:'Bebas Neue';font-size:26px;color:var(--accent2);">76.98%</div>
+              <div style="font-size:9px;color:var(--muted);">of Q1 leads in core</div>
+            </div>
+            <div style="text-align:center;background:var(--surface2);border-radius:7px;padding:10px 6px;">
+              <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Core ARIPs</div>
+              <div style="font-family:'Bebas Neue';font-size:26px;color:var(--text);">48</div>
+              <div style="font-size:9px;color:var(--muted);">55.2% · $16.2K avg</div>
+            </div>
+            <div style="text-align:center;background:rgba(77,158,247,0.08);border:1px solid rgba(77,158,247,0.2);border-radius:7px;padding:10px 6px;">
+              <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Non-Core ARIPs</div>
+              <div style="font-family:'Bebas Neue';font-size:26px;color:var(--blue);">39</div>
+              <div style="font-size:9px;color:var(--blue);">44.8% · $26K avg fee</div>
+            </div>
+            <div style="text-align:center;background:var(--surface2);border-radius:7px;padding:10px 6px;">
+              <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Core Closed Rev</div>
+              <div style="font-family:'Bebas Neue';font-size:26px;color:var(--accent2);">62%</div>
+              <div style="font-size:9px;color:var(--muted);">$760K of $1.22M total</div>
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--mid);line-height:1.75;">
+            <strong style="color:var(--text)">Core market list:</strong> Newark, Paterson, East Orange, Jersey City, Irvington, Elizabeth, Orange, Bloomfield, Belleville, Roselle, West Orange, Hillside, Rahway, Linden, Nutley, Perth Amboy, Clifton, Morristown, Maplewood, Plainfield.<br>
+            <strong style="color:var(--warn)">The tension:</strong> Core focus drives lead volume but non-core ARIPs generate <strong style="color:var(--text)">+$9,828 higher avg fee per deal.</strong> Elizabeth ($60.9K all-time avg) and Morristown ($69.8K all-time avg) are core cities that also punch well above average on fee — doubling down on those specifically captures both. Full breakdown in the 📈 All-Time tab.
+          </div>
+        </div>
         const srcData = {
           ppl: {
             name:'Pay Per Lead', color:'#00c896', glow:'rgba(0,200,150,',
@@ -786,6 +824,27 @@
           }, 180);
         }
 
+        
+const atData = [21872, 24399, 33095, 34709, 39884, 49767, 37061];
+const atLabels = ['2020', '2021', '2022', '2023', '2024', '2025', 'Q1 26'];
+const atMax = Math.max(...atData);
+const atBars = document.getElementById('at-bars');
+const atLbls = document.getElementById('at-lbls');
+if (atBars && atLbls) {
+  atData.forEach((v,i) => {
+    const bar = document.createElement('div');
+    bar.style.cssText = `flex:1;border-radius:2px 2px 0 0;min-height:2px;`;
+    bar.style.height = Math.max((v/atMax)*100, 3) + '%';
+    bar.style.background = i===5 ? 'var(--accent)' : i===6 ? 'var(--accent2)' : 'rgba(0,200,150,0.3)';
+    bar.title = atLabels[i] + ': $' + v.toLocaleString();
+    atBars.appendChild(bar);
+    const lbl = document.createElement('div');
+    lbl.style.cssText = 'flex:1;text-align:center;font-size:8px;color:var(--muted);';
+    lbl.textContent = atLabels[i];
+    atLbls.appendChild(lbl);
+  });
+}
+
         // Init with Direct Mail selected
         showSpotlight('dm');
         </script>
@@ -867,36 +926,36 @@
       </div>
     </div>
     <table class="qoq-table">
-      <thead><tr><th>Key Result</th><th>Goal</th><th>Q4 Act.</th><th>Q4 %</th><th>Q1 Act.</th><th>Q1 %</th><th>Trend</th><th>Progress</th></tr></thead>
+      <thead><tr><th>Key Result</th><th>Goal</th><th>Q4 Act.</th><th>Q4 %</th><th>Q1 Act.</th><th>Q1 %</th><th style="color:var(--blue)">Q4→Q1 Δ</th><th>Progress</th></tr></thead>
       <tbody>
         <tr>
           <td>Move opps out of ARIP</td><td>70</td><td class="q4v">37</td><td class="q4v">52.9%</td><td class="q1v">61</td><td class="q1v" style="color:var(--accent2)">87.1%</td>
-          <td><span class="trend-up">↑</span></td>
+          <td><span class="delta-pos">+34.2pp</span></td>
           <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:53%;background:var(--muted)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:87%;background:var(--accent2)"></div></div></div></div></td>
         </tr>
         <tr>
           <td>Add opps to ARIP</td><td>100</td><td class="q4v">68</td><td class="q4v">68%</td><td class="q1v">86</td><td class="q1v" style="color:var(--accent2)">86%</td>
-          <td><span class="trend-up">↑</span></td>
+          <td><span class="delta-pos">+18.0pp</span></td>
           <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:68%;background:var(--muted)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:86%;background:var(--accent2)"></div></div></div></div></td>
         </tr>
         <tr>
           <td>Remove $2.8M value from ARIP</td><td>$2.8M</td><td class="q4v">$1.20M</td><td class="q4v">42.7%</td><td class="q1v">$2.59M</td><td class="q1v" style="color:var(--accent2)">92.4%</td>
-          <td><span class="trend-up">↑</span></td>
+          <td><span class="delta-pos">+49.7pp</span></td>
           <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:43%;background:var(--muted)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:92%;background:var(--accent2)"></div></div></div></div></td>
         </tr>
         <tr>
           <td>Set 1,500 total appointments</td><td>1,500</td><td class="q4v">1,300</td><td class="q4v">86.7%</td><td class="q1v">2,197</td><td class="q1v" style="color:var(--accent)">146%</td>
-          <td><span class="trend-up">↑</span></td>
+          <td><span class="delta-pos">+59.3pp</span></td>
           <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:69%;background:var(--muted)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td>
         </tr>
         <tr>
           <td>Send 300 total contracts</td><td>300</td><td class="q4v">329</td><td class="q4v" style="color:var(--accent)">109.7%</td><td class="q1v">402</td><td class="q1v" style="color:var(--accent)">134%</td>
-          <td><span class="trend-up">↑</span></td>
+          <td><span class="delta-pos">+24.3pp</span></td>
           <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td>
         </tr>
         <tr>
           <td>Onboard 2 Lead Managers</td><td>2</td><td class="q4v">—</td><td class="q4v">—</td><td class="q1v">2</td><td class="q1v" style="color:var(--accent)">100%</td>
-          <td><span class="trend-flat">→</span></td>
+          <td><span class="delta-flat">N/A</span></td>
           <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:0%;background:var(--muted)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td>
         </tr>
       </tbody>
@@ -962,31 +1021,31 @@
       </div>
     </div>
     <table class="qoq-table">
-      <thead><tr><th>Key Result</th><th>Goal</th><th>Q4 Act.</th><th>Q4 %</th><th>Q1 Act.</th><th>Q1 %</th><th>Trend</th><th>Progress</th></tr></thead>
+      <thead><tr><th>Key Result</th><th>Goal</th><th>Q4 Act.</th><th>Q4 %</th><th>Q1 Act.</th><th>Q1 %</th><th style="color:var(--blue)">Q4→Q1 Δ</th><th>Progress</th></tr></thead>
       <tbody>
         <tr>
           <td>Realize $1.1M top-line revenue</td><td>$1.1M</td><td class="q4v">$1,113,273</td><td class="q4v" style="color:var(--accent)">101.2%</td><td class="q1v">$1,256,184</td><td class="q1v" style="color:var(--accent)">114.2%</td>
-          <td><span class="trend-up">↑</span></td>
+          <td><span class="delta-pos">+13.0pp</span></td>
           <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td>
         </tr>
         <tr>
           <td>Close $950K from existing pipeline</td><td>$950K</td><td class="q4v">$1,113,273</td><td class="q4v" style="color:var(--accent)">117.2%</td><td class="q1v">$1,256,184</td><td class="q1v" style="color:var(--accent)">132.2%</td>
-          <td><span class="trend-up">↑</span></td>
+          <td><span class="delta-pos">+15.0pp</span></td>
           <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td>
         </tr>
         <tr>
           <td>Secure new assignments</td><td>4</td><td class="q4v">22</td><td class="q4v" style="color:var(--accent)">550%</td><td class="q1v">22</td><td class="q1v" style="color:var(--accent)">550%</td>
-          <td><span class="trend-flat">→</span></td>
+          <td><span class="delta-flat">0pp</span></td>
           <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td>
         </tr>
         <tr>
           <td>Onboard Junior TC</td><td>1</td><td class="q4v">0</td><td class="q4v" style="color:var(--danger)">0%</td><td class="q1v">0</td><td class="q1v" style="color:var(--danger)">0%</td>
-          <td><span class="trend-flat">→</span></td>
+          <td><span class="delta-flat">0pp</span></td>
           <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:1%;background:var(--danger)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:1%;background:var(--danger)"></div></div></div></div></td>
         </tr>
         <tr>
           <td>Route 75% buyers → preferred lender</td><td>75%</td><td class="q4v">3.70%</td><td class="q4v" style="color:var(--danger)">4.9%</td><td class="q1v">12.12%</td><td class="q1v" style="color:var(--danger)">16.2%</td>
-          <td><span class="trend-up" style="color:var(--warn)">↑</span></td>
+          <td><span class="delta-pos" style="color:var(--warn)">+11.3pp</span></td>
           <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:5%;background:var(--danger)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:16%;background:var(--warn)"></div></div></div></div></td>
         </tr>
       </tbody>
@@ -1049,16 +1108,16 @@
       </div>
     </div>
     <table class="qoq-table">
-      <thead><tr><th>Key Result</th><th>Goal</th><th>Q4 Act.</th><th>Q4 %</th><th>Q1 Act.</th><th>Q1 %</th><th>Trend</th><th>Progress</th></tr></thead>
+      <thead><tr><th>Key Result</th><th>Goal</th><th>Q4 Act.</th><th>Q4 %</th><th>Q1 Act.</th><th>Q1 %</th><th style="color:var(--blue)">Q4→Q1 Δ</th><th>Progress</th></tr></thead>
       <tbody>
         <tr>
           <td>≥85% leads in Top-20 cities</td><td>85%</td><td class="q4v">52.87%</td><td class="q4v" style="color:var(--danger)">62.2%</td><td class="q1v">76.98%</td><td class="q1v" style="color:var(--warn)">90.6%</td>
-          <td><span class="trend-up">↑</span></td>
+          <td><span class="delta-pos">+28.4pp</span></td>
           <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:62%;background:var(--danger)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:91%;background:var(--accent2)"></div></div></div></div></td>
         </tr>
         <tr>
-          <td>≥450 net new Opps within 30 days</td><td>450</td><td class="q4v">474</td><td class="q4v" style="color:var(--accent)">105.3%</td><td class="q1v">525</td><td class="q1v" style="color:var(--accent)">116.7%</td>
-          <td><span class="trend-up">↑</span></td>
+          <td>≥450 net new same-quarter Opps (30 days)</td><td>450</td><td class="q4v">474</td><td class="q4v" style="color:var(--accent)">105.3%</td><td class="q1v">525</td><td class="q1v" style="color:var(--accent)">116.7%</td>
+          <td><span class="delta-pos">+11.4pp</span></td>
           <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td>
         </tr>
         <tr>
@@ -1219,36 +1278,36 @@
       </div>
     </div>
     <table class="qoq-table">
-      <thead><tr><th>Key Result</th><th>Goal</th><th>Q4 Act.</th><th>Q4 Grade</th><th>Q1 Act.</th><th>Q1 Grade</th><th>Trend</th><th>Progress</th></tr></thead>
+      <thead><tr><th>Key Result</th><th>Goal</th><th>Q4 Act.</th><th>Q4 Grade</th><th>Q1 Act.</th><th>Q1 Grade</th><th style="color:var(--blue)">Q4→Q1 Δ</th><th>Progress</th></tr></thead>
       <tbody>
         <tr>
           <td>MAO avg fee (objective)</td><td>$45K</td><td class="q4v">$67,709</td><td class="q4v" style="color:var(--accent)">A ✓</td><td class="q1v">$60,956</td><td class="q1v" style="color:var(--accent)">A ✓</td>
-          <td><span class="trend-dn">↓</span></td>
+          <td><span class="delta-neg" style="color:var(--warn)">−$6,752</span></td>
           <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:90%;background:var(--accent2)"></div></div></div></div></td>
         </tr>
         <tr>
           <td>$250+ UW dollars per deal</td><td>$250</td><td class="q4v">$1,321.93</td><td class="q4v" style="color:var(--accent)">A ✓</td><td class="q1v">$662.24</td><td class="q1v" style="color:var(--accent)">A ✓</td>
-          <td><span class="trend-dn" style="color:var(--warn)">↓</span></td>
+          <td><span class="delta-neg">−$659/deal</span></td>
           <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:50%;background:var(--accent2)"></div></div></div></div></td>
         </tr>
         <tr>
           <td>Fewer than 5 deals flagged missed</td><td>&lt;5</td><td class="q4v">0</td><td class="q4v" style="color:var(--accent)">A ✓</td><td class="q1v">0</td><td class="q1v" style="color:var(--accent)">A ✓</td>
-          <td><span class="trend-flat">→</span></td>
+          <td><span class="delta-flat">0</span></td>
           <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td>
         </tr>
         <tr>
           <td>Appt → UW complete ≤18 hrs</td><td>18 hrs</td><td class="q4v">25 hrs</td><td class="q4v" style="color:var(--danger)">F ✗</td><td class="q1v">32 hrs</td><td class="q1v" style="color:var(--danger)">F ✗</td>
-          <td><span class="trend-dn">↓</span></td>
+          <td><span class="delta-neg">−7 hrs</span></td>
           <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:72%;background:var(--warn)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:56%;background:var(--danger)"></div></div></div></div></td>
         </tr>
         <tr>
           <td>Clear DR / ARIP re-underwrites</td><td>0</td><td class="q4v">82 outstanding</td><td class="q4v" style="color:var(--danger)">F ✗</td><td class="q1v">48 outstanding</td><td class="q1v" style="color:var(--warn)">F ✗</td>
-          <td><span class="trend-up" style="color:var(--warn)">↑</span></td>
+          <td><span class="delta-pos" style="color:var(--warn)">−34 items</span></td>
           <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--danger)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:59%;background:var(--warn)"></div></div></div></div></td>
         </tr>
         <tr>
           <td>+/-5% sales price accuracy</td><td>+/-5%</td><td class="q4v">—</td><td class="q4v">—</td><td class="q1v">88.92%</td><td class="q1v" style="color:var(--warn)">C</td>
-          <td><span class="trend-flat">→</span></td>
+          <td><span class="delta-flat">N/A</span></td>
           <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:0%;background:var(--muted)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:72%;background:var(--warn)"></div></div></div></div></td>
         </tr>
       </tbody>
@@ -1368,6 +1427,198 @@
   </div>
 </div>
 </div>
+
+<!-- ══════════════ PAGE: ALL-TIME ══════════════ -->
+<div id="page-alltime" class="page">
+<div class="container">
+
+  <div class="sec">
+    <div class="sec-head"><span class="sec-label">All-Time Performance — 2019 through Q1 2026</span><div class="sec-line"></div><span class="sec-note">641 closed deals · $21.4M total net revenue</span></div>
+
+    <div class="callout" style="margin-bottom:12px;">
+      <div class="cc"><div class="cc-lbl">Total Deals Closed</div><div class="cc-val" style="color:var(--text)">641</div><div class="cc-sub">2019 – Q1 2026</div></div>
+      <div class="cc"><div class="cc-lbl">Total Net Revenue</div><div class="cc-val" style="color:var(--accent)">$21.4M</div><div class="cc-sub">All deals, all years</div></div>
+      <div class="cc"><div class="cc-lbl">All-Time Avg Fee</div><div class="cc-val" style="color:var(--accent2)">$33,493</div><div class="cc-sub">Mean per deal</div></div>
+      <div class="cc"><div class="cc-lbl">All-Time Median Fee</div><div class="cc-val" style="color:var(--mid)">$21,092</div><div class="cc-sub">50th percentile</div></div>
+      <div class="cc"><div class="cc-lbl">Avg Fee (2025)</div><div class="cc-val" style="color:var(--accent)">$49,767</div><div class="cc-sub">Best year on record</div></div>
+      <div class="cc"><div class="cc-lbl">Q1 2026 Avg</div><div class="cc-val" style="color:var(--accent2)">$37,061</div><div class="cc-sub">vs $33,493 all-time</div></div>
+    </div>
+
+    <div class="g2">
+      <!-- YEAR TREND -->
+      <div class="panel">
+        <div class="p-title">Average Fee per Deal — Year-over-Year Trend</div>
+        <table class="source-table">
+          <thead><tr><th>Year</th><th class="r">Deals</th><th class="r">Total Rev</th><th class="r">Avg Fee</th><th class="r">Median Fee</th><th class="r">Δ Avg YoY</th></tr></thead>
+          <tbody>
+            <tr><td>2019</td><td class="r">1</td><td class="r">$37,713</td><td class="r">$37,713</td><td class="r">$37,713</td><td class="r"><span class="delta-flat">—</span></td></tr>
+            <tr><td>2020</td><td class="r">99</td><td class="r">$2.17M</td><td class="r">$21,872</td><td class="r">$16,975</td><td class="r"><span class="delta-flat">Base</span></td></tr>
+            <tr><td>2021</td><td class="r">147</td><td class="r">$3.59M</td><td class="r">$24,399</td><td class="r">$15,400</td><td class="r"><span class="delta-pos">+$2,527</span></td></tr>
+            <tr><td>2022</td><td class="r">97</td><td class="r">$3.21M</td><td class="r">$33,095</td><td class="r">$20,000</td><td class="r"><span class="delta-pos">+$8,696</span></td></tr>
+            <tr><td>2023</td><td class="r">67</td><td class="r">$2.33M</td><td class="r">$34,709</td><td class="r">$24,083</td><td class="r"><span class="delta-pos">+$1,614</span></td></tr>
+            <tr><td>2024</td><td class="r">84</td><td class="r">$3.35M</td><td class="r">$39,884</td><td class="r">$27,727</td><td class="r"><span class="delta-pos">+$5,175</span></td></tr>
+            <tr style="background:rgba(0,200,150,0.04);"><td style="color:var(--accent)"><strong>2025</strong></td><td class="r" style="color:var(--accent)">111</td><td class="r" style="color:var(--accent)">$5.52M</td><td class="r" style="color:var(--accent)"><strong>$49,767</strong></td><td class="r" style="color:var(--accent)">$41,072</td><td class="r"><span class="delta-pos">+$9,883</span></td></tr>
+            <tr style="background:rgba(232,197,71,0.04);"><td style="color:var(--accent2)"><strong>2026 Q1</strong></td><td class="r" style="color:var(--accent2)">33</td><td class="r" style="color:var(--accent2)">$1.22M</td><td class="r" style="color:var(--accent2)"><strong>$37,061</strong></td><td class="r" style="color:var(--accent2)">$25,931</td><td class="r"><span class="delta-neg">−$12,706</span></td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:10px;padding:9px 12px;background:var(--surface2);border-radius:6px;font-size:11px;color:var(--mid);line-height:1.65;">
+          <strong style="color:var(--text)">Trend:</strong> Avg fee grew consistently from $21.9K (2020) to $49.8K (2025) — a 127% increase in 5 years. Q1 2026 pulled back to $37K, below 2024's avg. The decline is partly structural (more assignments at lower spreads) and partly the fee gap identified in UW underwriting.
+        </div>
+        <!-- Avg fee trend bars -->
+        <div style="margin-top:12px;">
+          <div style="font-size:10px;color:var(--muted);margin-bottom:6px;">Avg fee per year (bar height = relative to 2025 peak)</div>
+          <div style="display:flex;align-items:flex-end;gap:6px;height:60px;">
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;"><div style="width:100%;background:var(--muted);border-radius:2px 2px 0 0;opacity:0.4" style2="height:44%"></div><div style="font-size:8px;color:var(--muted)">20</div></div>
+          </div>
+          <div id="at-bars" style="display:flex;align-items:flex-end;gap:5px;height:60px;margin-bottom:4px;"></div>
+          <div id="at-lbls" style="display:flex;gap:5px;"></div>
+        </div>
+      </div>
+
+      <!-- DEAL STRUCTURE ALL TIME -->
+      <div class="panel">
+        <div class="p-title">Deal Structure — All-Time Mix</div>
+        <table class="source-table">
+          <thead><tr><th>Type</th><th class="r">Count</th><th class="r">Total Rev</th><th class="r">Avg Fee</th><th class="r">Median</th></tr></thead>
+          <tbody>
+            <tr><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--blue);margin-right:6px;vertical-align:middle;"></span>Listing</td><td class="r">197</td><td class="r">$2.69M</td><td class="r" style="color:var(--warn)">$13,633</td><td class="r">$13,300</td></tr>
+            <tr><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:6px;vertical-align:middle;"></span>Assignment</td><td class="r">153</td><td class="r" style="color:var(--accent)">$6.97M</td><td class="r" style="color:var(--accent)">$45,526</td><td class="r">$35,750</td></tr>
+            <tr><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--teal);margin-right:6px;vertical-align:middle;"></span>Novation</td><td class="r">64</td><td class="r">$2.38M</td><td class="r" style="color:var(--accent2)">$37,252</td><td class="r">$31,079</td></tr>
+            <tr><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--purple);margin-right:6px;vertical-align:middle;"></span>Purchase</td><td class="r">10</td><td class="r">$696K</td><td class="r" style="color:var(--accent)">$69,606</td><td class="r">$79,978</td></tr>
+            <tr><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--pink);margin-right:6px;vertical-align:middle;"></span>Fix &amp; Flip</td><td class="r">10</td><td class="r">$546K</td><td class="r">$54,645</td><td class="r">$27,385</td></tr>
+            <tr><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent2);margin-right:6px;vertical-align:middle;"></span>Double Close (Retail)</td><td class="r">7</td><td class="r">$403K</td><td class="r">$57,615</td><td class="r">$55,000</td></tr>
+            <tr><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--muted);margin-right:6px;vertical-align:middle;"></span>Other (LLC, Wholesale…)</td><td class="r">7</td><td class="r">$427K</td><td class="r">$61,000</td><td class="r">$40,250</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:10px;padding:9px 12px;background:var(--surface2);border-radius:6px;font-size:11px;color:var(--mid);line-height:1.65;">
+          <strong style="color:var(--text)">Structural insight:</strong> Listings (197 deals, $13.6K avg) drag the all-time avg down significantly. Excluding listings, all-time avg fee on non-listing deals = <strong style="color:var(--text)">~$40,500</strong> — much closer to Q1 2026 performance. Assignment and Novation together account for the highest volume of quality deals.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VP ALL-TIME -->
+  <div class="sec">
+    <div class="sec-head"><span class="sec-label">VP All-Time Production</span><div class="sec-line"></div><span class="sec-note">Career stats · Total Net Revenue · All closed deals</span></div>
+    <div class="g2">
+      <div class="panel">
+        <div class="p-title">VP Career Production — Ranked by Total Revenue</div>
+        <table class="vp-prod-table">
+          <thead><tr><th>VP / AM</th><th class="r">Deals</th><th class="r">Total Rev</th><th class="r">Avg Fee</th><th class="r">Median</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--accent)">Sam Dogbe</td><td class="r hi">186</td><td class="r hi">$8,146,821</td><td class="r ok">$43,800</td><td class="r">$36,790</td></tr>
+            <tr><td style="color:var(--mid)">A Young</td><td class="r ok">67</td><td class="r ok">$3,037,564</td><td class="r ok">$45,337</td><td class="r">$33,250</td></tr>
+            <tr><td style="color:var(--mid)">Brendan Da Silva</td><td class="r ok">158</td><td class="r">$2,141,201</td><td class="r lo">$13,552</td><td class="r lo">$13,250</td></tr>
+            <tr><td style="color:var(--accent2)">Joey Szal</td><td class="r">45</td><td class="r ok">$1,719,728</td><td class="r ok">$38,216</td><td class="r">$25,931</td></tr>
+            <tr><td style="color:var(--mid)">Levi Taveras</td><td class="r">31</td><td class="r">$1,227,096</td><td class="r ok">$39,584</td><td class="r">$30,000</td></tr>
+            <tr><td style="color:var(--mid)">Isahia Aracena</td><td class="r">27</td><td class="r">$1,071,152</td><td class="r ok">$39,672</td><td class="r">$28,690</td></tr>
+            <tr><td style="color:var(--mid)">Anthony Ponteriero</td><td class="r">21</td><td class="r">$1,038,753</td><td class="r ok">$49,464</td><td class="r">$37,500</td></tr>
+            <tr><td style="color:var(--blue)">David Choi</td><td class="r">27</td><td class="r">$655,967</td><td class="r">$24,295</td><td class="r">$22,500</td></tr>
+            <tr><td style="color:var(--mid)">Ray O'Donnell</td><td class="r">6</td><td class="r">$178,500</td><td class="r lo">$29,750</td><td class="r lo">$16,665</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:10px;font-size:10px;color:var(--muted);font-style:italic;">Showing VPs with ≥6 deals. Brendan Da Silva's low avg fee reflects legacy listing/wholesale deals from earlier years.</div>
+      </div>
+      <div class="panel">
+        <div class="p-title">All-Time vs Q1 2026 — Key Comparisons</div>
+        <div class="trow"><div class="tr-name">All-time avg fee</div><div class="tr-val">$33,493</div></div>
+        <div class="trow"><div class="tr-name">All-time median fee</div><div class="tr-val">$21,092</div></div>
+        <div class="trow"><div class="tr-name">Q1 2026 avg fee</div><div class="tr-val" style="color:var(--accent2)">$37,061</div><div class="chip chip-g">+11% above all-time</div></div>
+        <div class="trow"><div class="tr-name">Q1 2026 median fee</div><div class="tr-val" style="color:var(--accent2)">$25,931</div><div class="chip chip-g">+23% above all-time</div></div>
+        <div class="trow"><div class="tr-name">2025 avg fee (peak year)</div><div class="tr-val" style="color:var(--accent)">$49,767</div></div>
+        <div class="trow"><div class="tr-name">Q1 2026 vs 2025 peak</div><div class="tr-val" style="color:var(--danger)">$37,061</div><div class="chip chip-r">−26% from peak</div></div>
+        <div class="trow"><div class="tr-name">Total deals all time</div><div class="tr-val">641</div></div>
+        <div class="trow"><div class="tr-name">Total revenue all time</div><div class="tr-val" style="color:var(--accent)">$21.4M</div></div>
+        <div style="margin-top:12px;padding:10px 12px;background:rgba(232,197,71,0.05);border:1px solid rgba(232,197,71,0.15);border-radius:7px;font-size:11px;color:var(--mid);line-height:1.7;">
+          <strong style="color:var(--text)">Fee trajectory:</strong> Q1 2026 avg fee ($37K) is above the all-time average ($33.5K) and above 2024 ($39.9K is close). The concern is the pullback from 2025's $49.8K peak — driven by deal structure mix (more novations vs assignments) and UW accuracy. The median tells a cleaner story: $25.9K in Q1 2026 vs $21.1K all-time — healthy improvement in the typical deal.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+  <!-- CORE MARKET INTELLIGENCE -->
+  <div class="sec">
+    <div class="sec-head"><span class="sec-label">Core Market Intelligence — Top 20 Cities</span><div class="sec-line"></div><span class="sec-note">Ranked by all-time deal count · Q1 2026 cross-referenced</span></div>
+    <div style="background:linear-gradient(135deg,rgba(77,158,247,0.06),rgba(77,158,247,0.02));border:1px solid rgba(77,158,247,0.22);border-radius:10px;padding:12px 16px;margin-bottom:12px;font-size:11px;color:var(--mid);line-height:1.7;">
+      <strong style="color:var(--text)">Core markets</strong> are the top 20 cities where Leverage Homes has historically closed the most deals. Marketing deliberately targets these markets — Q1 2026 saw <strong style="color:var(--text)">76.98% of all marketing-sourced leads</strong> concentrated in these cities. The table below shows all-time production per city alongside Q1 2026 ARIP and closed deal activity.
+    </div>
+    <div class="g2">
+      <div class="panel">
+        <div class="p-title">Top 20 Core Markets — All-Time Deal Production</div>
+        <table class="source-table">
+          <thead><tr>
+            <th>#</th><th>City</th><th class="r">All-Time Deals</th><th class="r">Total Rev</th><th class="r">Avg Fee</th><th class="r">Q1 ARIPs</th><th class="r">Q1 Closed</th>
+          </tr></thead>
+          <tbody>
+            <tr><td style="color:var(--muted);font-size:10px;">1</td><td><strong style="color:var(--accent)">Newark</strong></td><td class="r hi">158</td><td class="r">$5.25M</td><td class="r">$33,241</td><td class="r" style="color:var(--accent)">11</td><td class="r" style="color:var(--accent)">5</td></tr>
+            <tr><td style="color:var(--muted);font-size:10px;">2</td><td><strong style="color:var(--accent)">Paterson</strong></td><td class="r">61</td><td class="r">$2.69M</td><td class="r" style="color:var(--accent2)">$44,141</td><td class="r" style="color:var(--accent2)">5</td><td class="r" style="color:var(--accent2)">3</td></tr>
+            <tr><td style="color:var(--muted);font-size:10px;">3</td><td>East Orange</td><td class="r">53</td><td class="r">$1.69M</td><td class="r">$31,902</td><td class="r" style="color:var(--accent2)">5</td><td class="r">2</td></tr>
+            <tr><td style="color:var(--muted);font-size:10px;">4</td><td>Jersey City</td><td class="r">50</td><td class="r">$1.83M</td><td class="r">$36,669</td><td class="r" style="color:var(--accent2)">6</td><td class="r">—</td></tr>
+            <tr><td style="color:var(--muted);font-size:10px;">5</td><td>Irvington</td><td class="r">39</td><td class="r">$1.08M</td><td class="r">$27,581</td><td class="r">4</td><td class="r">2</td></tr>
+            <tr><td style="color:var(--muted);font-size:10px;">6</td><td><strong style="color:var(--accent)">Elizabeth ★</strong></td><td class="r">20</td><td class="r">$1.22M</td><td class="r" style="color:var(--accent)">$60,887</td><td class="r" style="color:var(--accent)">6</td><td class="r">2</td></tr>
+            <tr><td style="color:var(--muted);font-size:10px;">7</td><td>Orange</td><td class="r">17</td><td class="r">$555K</td><td class="r">$32,618</td><td class="r">2</td><td class="r">—</td></tr>
+            <tr><td style="color:var(--muted);font-size:10px;">8</td><td>Bloomfield</td><td class="r">13</td><td class="r">$175K</td><td class="r" style="color:var(--danger)">$13,489</td><td class="r">—</td><td class="r">—</td></tr>
+            <tr><td style="color:var(--muted);font-size:10px;">9</td><td>Belleville</td><td class="r">13</td><td class="r">$328K</td><td class="r">$25,203</td><td class="r">—</td><td class="r">1</td></tr>
+            <tr><td style="color:var(--muted);font-size:10px;">10</td><td>Roselle</td><td class="r">10</td><td class="r">$204K</td><td class="r">$20,373</td><td class="r">—</td><td class="r">—</td></tr>
+            <tr><td style="color:var(--muted);font-size:10px;">11</td><td>West Orange</td><td class="r">10</td><td class="r">$260K</td><td class="r">$25,968</td><td class="r">2</td><td class="r">1</td></tr>
+            <tr><td style="color:var(--muted);font-size:10px;">12</td><td>Hillside</td><td class="r">10</td><td class="r">$308K</td><td class="r">$30,758</td><td class="r">—</td><td class="r">1</td></tr>
+            <tr><td style="color:var(--muted);font-size:10px;">13</td><td>Rahway</td><td class="r">8</td><td class="r">$267K</td><td class="r">$33,324</td><td class="r">—</td><td class="r">—</td></tr>
+            <tr><td style="color:var(--muted);font-size:10px;">14</td><td>Linden</td><td class="r">8</td><td class="r">$157K</td><td class="r">$19,666</td><td class="r" style="color:var(--accent)">3</td><td class="r">—</td></tr>
+            <tr><td style="color:var(--muted);font-size:10px;">15</td><td>Nutley</td><td class="r">7</td><td class="r">$115K</td><td class="r">$16,489</td><td class="r">—</td><td class="r">—</td></tr>
+            <tr><td style="color:var(--muted);font-size:10px;">16</td><td>Perth Amboy</td><td class="r">7</td><td class="r">$260K</td><td class="r">$37,108</td><td class="r">2</td><td class="r">1</td></tr>
+            <tr><td style="color:var(--muted);font-size:10px;">17</td><td>Clifton</td><td class="r">6</td><td class="r">$99K</td><td class="r">$16,424</td><td class="r">—</td><td class="r">1</td></tr>
+            <tr><td style="color:var(--muted);font-size:10px;">18</td><td><strong style="color:var(--accent)">Morristown ★</strong></td><td class="r">6</td><td class="r">$419K</td><td class="r" style="color:var(--accent)">$69,752</td><td class="r">—</td><td class="r">—</td></tr>
+            <tr><td style="color:var(--muted);font-size:10px;">19</td><td>Maplewood</td><td class="r">6</td><td class="r">$117K</td><td class="r">$19,506</td><td class="r">—</td><td class="r">—</td></tr>
+            <tr><td style="color:var(--muted);font-size:10px;">20</td><td>Plainfield</td><td class="r">6</td><td class="r">$276K</td><td class="r" style="color:var(--accent2)">$45,961</td><td class="r">—</td><td class="r">—</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:8px;font-size:10px;color:var(--muted);">★ = quality outlier by avg fee &nbsp;·&nbsp; Q1 ARIP/Closed counts may include some address parsing gaps</div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <div class="panel">
+          <div class="p-title">Core Market vs Non-Core — Q1 2026</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
+            <div style="background:rgba(0,200,150,0.06);border:1px solid rgba(0,200,150,0.2);border-radius:7px;padding:11px;text-align:center;">
+              <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px;">Core Market ARIPs</div>
+              <div style="font-family:'Bebas Neue';font-size:28px;color:var(--accent);">48</div>
+              <div style="font-size:10px;color:var(--mid);">55.2% of all ARIPs</div>
+            </div>
+            <div style="background:rgba(77,158,247,0.06);border:1px solid rgba(77,158,247,0.2);border-radius:7px;padding:11px;text-align:center;">
+              <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px;">Non-Core ARIPs</div>
+              <div style="font-family:'Bebas Neue';font-size:28px;color:var(--blue);">39</div>
+              <div style="font-size:10px;color:var(--mid);">44.8% of all ARIPs</div>
+            </div>
+          </div>
+          <div class="trow"><div class="tr-name">Core market lead concentration (Q1)</div><div class="tr-val" style="color:var(--accent2)">76.98%</div><div class="chip chip-y">vs 85% goal</div></div>
+          <div class="trow"><div class="tr-name">Core ARIP avg fee</div><div class="tr-val" style="color:var(--warn)">$16,217</div></div>
+          <div class="trow"><div class="tr-name">Non-core ARIP avg fee</div><div class="tr-val" style="color:var(--accent)">$26,045</div><div class="chip chip-g">+61%</div></div>
+          <div class="trow"><div class="tr-name">Core closed revenue</div><div class="tr-val">$760,188</div><div class="chip chip-y">62.2%</div></div>
+          <div class="trow"><div class="tr-name">Non-core closed revenue</div><div class="tr-val">$462,823</div><div class="chip chip-m">37.8%</div></div>
+          <div class="alert w" style="margin-top:10px;margin-bottom:0;">
+            <div class="ai">⚠</div><div class="at"><strong>Core market focus is working for lead volume</strong> (76.98% concentration) but non-core markets are producing 61% higher avg fees per ARIP deal. Markets like Morristown ($69.8K avg), Elizabeth ($60.9K avg), and Passaic ($52.7K avg) historically deliver larger fees. Q2 question: optimize for volume (core) or fee size (non-core mix)?</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="p-title">Highest-Value Core Cities by All-Time Avg Fee</div>
+          <div class="txrow"><div class="txlbl">Morristown</div><div class="txtrack"><div class="txfill" style="width:100%;background:var(--accent)"></div></div><div class="txval">$69.8K</div></div>
+          <div class="txrow"><div class="txlbl">Elizabeth</div><div class="txtrack"><div class="txfill" style="width:87%;background:var(--accent)"></div></div><div class="txval">$60.9K</div></div>
+          <div class="txrow"><div class="txlbl">Plainfield</div><div class="txtrack"><div class="txfill" style="width:66%;background:var(--accent2)"></div></div><div class="txval">$46.0K</div></div>
+          <div class="txrow"><div class="txlbl">Paterson</div><div class="txtrack"><div class="txfill" style="width:63%;background:var(--accent2)"></div></div><div class="txval">$44.1K</div></div>
+          <div class="txrow"><div class="txlbl">Perth Amboy</div><div class="txtrack"><div class="txfill" style="width:53%;background:var(--accent2)"></div></div><div class="txval">$37.1K</div></div>
+          <div class="txrow"><div class="txlbl">Jersey City</div><div class="txtrack"><div class="txfill" style="width:53%;background:var(--accent2)"></div></div><div class="txval">$36.7K</div></div>
+          <div class="txrow"><div class="txlbl">Rahway</div><div class="txtrack"><div class="txfill" style="width:48%;background:var(--mid)"></div></div><div class="txval">$33.3K</div></div>
+          <div class="txrow"><div class="txlbl">Newark</div><div class="txtrack"><div class="txfill" style="width:48%;background:var(--mid)"></div></div><div class="txval">$33.2K</div></div>
+          <div style="margin-top:8px;font-size:11px;color:var(--muted);">Elizabeth and Morristown are underweighted relative to their fee quality. Both are core markets by deal count but among the highest-returning per deal.</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <div class="footer">
   <div class="footer-l">Leverage Homes · A Leverage Companies Company · Northern NJ Real Estate Acquisitions<br>
