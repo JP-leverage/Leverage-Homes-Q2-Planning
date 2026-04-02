@@ -238,6 +238,32 @@
   .footer-l{font-size:11px;color:var(--muted);}
   .footer-r{font-size:10px;color:var(--muted);font-family:'DM Mono';text-align:right;}
 
+
+  /* QoQ Comparison styles */
+  .qoq-panel { background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:14px; }
+  .qoq-header { display:flex;align-items:center;gap:10px;margin-bottom:12px; }
+  .qoq-title { font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;font-weight:600;flex:1; }
+  .qoq-legend { display:flex;gap:12px; }
+  .qoq-leg { display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted); }
+  .qoq-dot { width:8px;height:8px;border-radius:50%; }
+  .qoq-table { width:100%;border-collapse:collapse; }
+  .qoq-table th { font-size:9px;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;padding:4px 8px;border-bottom:1px solid var(--border);text-align:right; }
+  .qoq-table th:first-child { text-align:left; }
+  .qoq-table td { padding:8px 8px;font-family:'DM Mono';font-size:11px;color:var(--mid);border-bottom:1px solid rgba(28,34,48,0.5);text-align:right;vertical-align:middle; }
+  .qoq-table td:first-child { text-align:left;font-family:'DM Sans';font-size:12px;color:var(--text); }
+  .qoq-table tr:last-child td { border-bottom:none; }
+  .qoq-table .q4v { color:var(--muted); }
+  .qoq-table .q1v { color:var(--text);font-weight:500; }
+  .trend-up   { color:var(--accent);font-size:14px;font-weight:700; }
+  .trend-dn   { color:var(--danger);font-size:14px;font-weight:700; }
+  .trend-flat { color:var(--muted);font-size:14px; }
+  .qoq-bar-wrap { display:flex;align-items:center;gap:5px;justify-content:flex-end; }
+  .qoq-bar-pair { display:flex;flex-direction:column;gap:2px;width:80px; }
+  .qoq-bar-row { display:flex;align-items:center;gap:3px; }
+  .qoq-bar-lbl { font-size:8px;color:var(--muted);width:16px;text-align:right; }
+  .qoq-bar-bg { flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden; }
+  .qoq-bar-fill { height:100%;border-radius:2px; }
+
   @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 </style>
 </head>
@@ -828,6 +854,55 @@
 <div id="page-sales" class="page">
 <div class="container">
   <div class="sec">
+
+  <!-- Q4 vs Q1 Comparison -->
+  <div class="qoq-panel">
+    <div class="qoq-header">
+      <div class="qoq-title">Q4 2025 vs Q1 2026 — Sales OKR Comparison</div>
+      <div class="qoq-legend">
+        <div class="qoq-leg"><div class="qoq-dot" style="background:var(--muted)"></div>Q4 Actual</div>
+        <div class="qoq-leg"><div class="qoq-dot" style="background:var(--accent)"></div>Q1 Actual</div>
+      </div>
+    </div>
+    <table class="qoq-table">
+      <thead><tr><th>Key Result</th><th>Goal</th><th>Q4 Act.</th><th>Q4 %</th><th>Q1 Act.</th><th>Q1 %</th><th>Trend</th><th>Progress</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Move opps out of ARIP</td><td>70</td><td class="q4v">37</td><td class="q4v">52.9%</td><td class="q1v">61</td><td class="q1v" style="color:var(--accent2)">87.1%</td>
+          <td><span class="trend-up">↑</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:53%;background:var(--muted)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:87%;background:var(--accent2)"></div></div></div></div></td>
+        </tr>
+        <tr>
+          <td>Add opps to ARIP</td><td>100</td><td class="q4v">68</td><td class="q4v">68%</td><td class="q1v">86</td><td class="q1v" style="color:var(--accent2)">86%</td>
+          <td><span class="trend-up">↑</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:68%;background:var(--muted)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:86%;background:var(--accent2)"></div></div></div></div></td>
+        </tr>
+        <tr>
+          <td>Remove $2.8M value from ARIP</td><td>$2.8M</td><td class="q4v">$1.20M</td><td class="q4v">42.7%</td><td class="q1v">$2.59M</td><td class="q1v" style="color:var(--accent2)">92.4%</td>
+          <td><span class="trend-up">↑</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:43%;background:var(--muted)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:92%;background:var(--accent2)"></div></div></div></div></td>
+        </tr>
+        <tr>
+          <td>Set 1,500 total appointments</td><td>1,500</td><td class="q4v">1,300</td><td class="q4v">86.7%</td><td class="q1v">2,197</td><td class="q1v" style="color:var(--accent)">146%</td>
+          <td><span class="trend-up">↑</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:69%;background:var(--muted)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td>
+        </tr>
+        <tr>
+          <td>Send 300 total contracts</td><td>300</td><td class="q4v">329</td><td class="q4v" style="color:var(--accent)">109.7%</td><td class="q1v">402</td><td class="q1v" style="color:var(--accent)">134%</td>
+          <td><span class="trend-up">↑</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td>
+        </tr>
+        <tr>
+          <td>Onboard 2 Lead Managers</td><td>2</td><td class="q4v">—</td><td class="q4v">—</td><td class="q1v">2</td><td class="q1v" style="color:var(--accent)">100%</td>
+          <td><span class="trend-flat">→</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:0%;background:var(--muted)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px;padding:9px 12px;background:var(--surface2);border-radius:6px;font-size:11px;color:var(--mid);line-height:1.65;">
+      <strong style="color:var(--text)">Quarter-over-quarter:</strong> All Sales OKRs improved from Q4 to Q1. The biggest jump was ARIP pipeline value — $1.2M in Q4 to $2.59M in Q1 (+116%). Appointment volume jumped from 1,300 to 2,197 (+69%). Contracts from 329→402. The deals-in and deals-out objectives moved from well below target in Q4 (68/37) to near-target in Q1 (86/61).
+    </div>
+  </div>
     <div class="sec-head"><span class="sec-label">Sales OKRs — Q1 2026</span><div class="sec-line"></div></div>
     <div class="okr-dept" style="border-color:rgba(0,200,150,0.3)">
       <div class="okr-dept-header"><div class="okr-dept-obj">Move 70 opportunities out of ARIP</div><div class="okr-dept-score" style="color:var(--accent2)">87%</div></div>
@@ -874,6 +949,50 @@
 <div id="page-transactions" class="page">
 <div class="container">
   <div class="sec">
+
+  <!-- Q4 vs Q1 Comparison -->
+  <div class="qoq-panel">
+    <div class="qoq-header">
+      <div class="qoq-title">Q4 2025 vs Q1 2026 — Transactions OKR Comparison</div>
+      <div class="qoq-legend">
+        <div class="qoq-leg"><div class="qoq-dot" style="background:var(--muted)"></div>Q4 Actual</div>
+        <div class="qoq-leg"><div class="qoq-dot" style="background:var(--accent)"></div>Q1 Actual</div>
+      </div>
+    </div>
+    <table class="qoq-table">
+      <thead><tr><th>Key Result</th><th>Goal</th><th>Q4 Act.</th><th>Q4 %</th><th>Q1 Act.</th><th>Q1 %</th><th>Trend</th><th>Progress</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Realize $1.1M top-line revenue</td><td>$1.1M</td><td class="q4v">$1,113,273</td><td class="q4v" style="color:var(--accent)">101.2%</td><td class="q1v">$1,256,184</td><td class="q1v" style="color:var(--accent)">114.2%</td>
+          <td><span class="trend-up">↑</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td>
+        </tr>
+        <tr>
+          <td>Close $950K from existing pipeline</td><td>$950K</td><td class="q4v">$1,113,273</td><td class="q4v" style="color:var(--accent)">117.2%</td><td class="q1v">$1,256,184</td><td class="q1v" style="color:var(--accent)">132.2%</td>
+          <td><span class="trend-up">↑</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td>
+        </tr>
+        <tr>
+          <td>Secure new assignments</td><td>4</td><td class="q4v">22</td><td class="q4v" style="color:var(--accent)">550%</td><td class="q1v">22</td><td class="q1v" style="color:var(--accent)">550%</td>
+          <td><span class="trend-flat">→</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td>
+        </tr>
+        <tr>
+          <td>Onboard Junior TC</td><td>1</td><td class="q4v">0</td><td class="q4v" style="color:var(--danger)">0%</td><td class="q1v">0</td><td class="q1v" style="color:var(--danger)">0%</td>
+          <td><span class="trend-flat">→</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:1%;background:var(--danger)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:1%;background:var(--danger)"></div></div></div></div></td>
+        </tr>
+        <tr>
+          <td>Route 75% buyers → preferred lender</td><td>75%</td><td class="q4v">3.70%</td><td class="q4v" style="color:var(--danger)">4.9%</td><td class="q1v">12.12%</td><td class="q1v" style="color:var(--danger)">16.2%</td>
+          <td><span class="trend-up" style="color:var(--warn)">↑</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:5%;background:var(--danger)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:16%;background:var(--warn)"></div></div></div></div></td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px;padding:9px 12px;background:var(--surface2);border-radius:6px;font-size:11px;color:var(--mid);line-height:1.65;">
+      <strong style="color:var(--text)">Q4 → Q1 story:</strong> Revenue grew from $1.11M to $1.26M (+13%). Preferred lender routing improved from 3.7% → 12.12% — still far from 75% but the trend is right. The Junior TC remains unresolved for two consecutive quarters — this is now a systemic gap, not a missed initiative.
+    </div>
+  </div>
     <div class="sec-head"><span class="sec-label">Transactions OKRs — Q1 2026</span><div class="sec-line"></div></div>
     <div class="okr-dept" style="border-color:rgba(0,200,150,0.3)">
       <div class="okr-dept-header"><div class="okr-dept-obj">Realize $1.1M in top-line revenue</div><div class="okr-dept-score" style="color:var(--accent)">100%</div></div>
@@ -917,6 +1036,40 @@
 <div id="page-marketing" class="page">
 <div class="container">
   <div class="sec">
+
+  <!-- Q4 vs Q1 Comparison -->
+  <div class="qoq-panel">
+    <div class="qoq-header">
+      <div class="qoq-title">Q4 2025 vs Q1 2026 — Marketing OKR Comparison</div>
+      <div class="qoq-legend">
+        <div class="qoq-leg"><div class="qoq-dot" style="background:var(--muted)"></div>Q4 Actual</div>
+        <div class="qoq-leg"><div class="qoq-dot" style="background:var(--accent)"></div>Q1 Actual</div>
+      </div>
+    </div>
+    <table class="qoq-table">
+      <thead><tr><th>Key Result</th><th>Goal</th><th>Q4 Act.</th><th>Q4 %</th><th>Q1 Act.</th><th>Q1 %</th><th>Trend</th><th>Progress</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>≥85% leads in Top-20 cities</td><td>85%</td><td class="q4v">52.87%</td><td class="q4v" style="color:var(--danger)">62.2%</td><td class="q1v">76.98%</td><td class="q1v" style="color:var(--warn)">90.6%</td>
+          <td><span class="trend-up">↑</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:62%;background:var(--danger)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:91%;background:var(--accent2)"></div></div></div></div></td>
+        </tr>
+        <tr>
+          <td>≥450 net new Opps within 30 days</td><td>450</td><td class="q4v">474</td><td class="q4v" style="color:var(--accent)">105.3%</td><td class="q1v">525</td><td class="q1v" style="color:var(--accent)">116.7%</td>
+          <td><span class="trend-up">↑</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td>
+        </tr>
+        <tr>
+          <td>≥22 ARIPs from marketing leads</td><td>22</td><td class="q4v">20</td><td class="q4v" style="color:var(--accent2)">90.9%</td><td class="q1v">23</td><td class="q1v" style="color:var(--accent)">104.5%</td>
+          <td><span class="trend-up">↑</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:91%;background:var(--accent2)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px;padding:9px 12px;background:var(--surface2);border-radius:6px;font-size:11px;color:var(--mid);line-height:1.65;">
+      <strong style="color:var(--text)">Q4 → Q1 story:</strong> The most notable improvement was Top-20 city lead concentration — Q4 was 52.87% (far below the 85% target) while Q1 hit 76.98% (near target). ARIPs from marketing went from 20 to 23, crossing the goal for the first time. Opp conversion stayed strong at 474→525.
+    </div>
+  </div>
     <div class="sec-head"><span class="sec-label">Marketing OKRs — Q1 2026</span><div class="sec-line"></div></div>
     <div class="okr-dept" style="border-color:rgba(0,200,150,0.3)">
       <div class="okr-dept-header"><div class="okr-dept-obj">Generate a predictable volume of Top-20+ (core market) seller leads that convert into net new Opportunities</div><div class="okr-dept-score" style="color:var(--accent)">100%</div></div>
@@ -951,6 +1104,55 @@
 <div id="page-underwriting" class="page">
 <div class="container">
   <div class="sec">
+
+  <!-- Q4 vs Q1 Comparison -->
+  <div class="qoq-panel">
+    <div class="qoq-header">
+      <div class="qoq-title">Q4 2025 vs Q1 2026 — Underwriting OKR Comparison</div>
+      <div class="qoq-legend">
+        <div class="qoq-leg"><div class="qoq-dot" style="background:var(--muted)"></div>Q4 Actual</div>
+        <div class="qoq-leg"><div class="qoq-dot" style="background:var(--accent)"></div>Q1 Actual</div>
+      </div>
+    </div>
+    <table class="qoq-table">
+      <thead><tr><th>Key Result</th><th>Goal</th><th>Q4 Act.</th><th>Q4 Grade</th><th>Q1 Act.</th><th>Q1 Grade</th><th>Trend</th><th>Progress</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>MAO avg fee (objective)</td><td>$45K</td><td class="q4v">$67,709</td><td class="q4v" style="color:var(--accent)">A ✓</td><td class="q1v">$60,956</td><td class="q1v" style="color:var(--accent)">A ✓</td>
+          <td><span class="trend-dn">↓</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:90%;background:var(--accent2)"></div></div></div></div></td>
+        </tr>
+        <tr>
+          <td>$250+ UW dollars per deal</td><td>$250</td><td class="q4v">$1,321.93</td><td class="q4v" style="color:var(--accent)">A ✓</td><td class="q1v">$662.24</td><td class="q1v" style="color:var(--accent)">A ✓</td>
+          <td><span class="trend-dn" style="color:var(--warn)">↓</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:50%;background:var(--accent2)"></div></div></div></div></td>
+        </tr>
+        <tr>
+          <td>Fewer than 5 deals flagged missed</td><td>&lt;5</td><td class="q4v">0</td><td class="q4v" style="color:var(--accent)">A ✓</td><td class="q1v">0</td><td class="q1v" style="color:var(--accent)">A ✓</td>
+          <td><span class="trend-flat">→</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td>
+        </tr>
+        <tr>
+          <td>Appt → UW complete ≤18 hrs</td><td>18 hrs</td><td class="q4v">25 hrs</td><td class="q4v" style="color:var(--danger)">F ✗</td><td class="q1v">32 hrs</td><td class="q1v" style="color:var(--danger)">F ✗</td>
+          <td><span class="trend-dn">↓</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:72%;background:var(--warn)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:56%;background:var(--danger)"></div></div></div></div></td>
+        </tr>
+        <tr>
+          <td>Clear DR / ARIP re-underwrites</td><td>0</td><td class="q4v">82 outstanding</td><td class="q4v" style="color:var(--danger)">F ✗</td><td class="q1v">48 outstanding</td><td class="q1v" style="color:var(--warn)">F ✗</td>
+          <td><span class="trend-up" style="color:var(--warn)">↑</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--danger)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:59%;background:var(--warn)"></div></div></div></div></td>
+        </tr>
+        <tr>
+          <td>+/-5% sales price accuracy</td><td>+/-5%</td><td class="q4v">—</td><td class="q4v">—</td><td class="q1v">88.92%</td><td class="q1v" style="color:var(--warn)">C</td>
+          <td><span class="trend-flat">→</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q4</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:0%;background:var(--muted)"></div></div></div><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:72%;background:var(--warn)"></div></div></div></div></td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px;padding:9px 12px;background:var(--surface2);border-radius:6px;font-size:11px;color:var(--mid);line-height:1.65;">
+      <strong style="color:var(--text)">Critical flags:</strong> UW speed got worse — 25 hrs in Q4 to 32 hrs in Q1, moving further from the 18-hr goal. The re-underwrite backlog improved (82→48) but remains an F. MAO avg fee dropped from $67.7K in Q4 to $61K in Q1 — still above the $45K target but the trend is declining. UW dollars per deal also halved from $1,321→$662.
+    </div>
+  </div>
     <div class="sec-head"><span class="sec-label">Underwriting OKRs — Q1 2026</span><div class="sec-line"></div></div>
     <div class="okr-dept" style="border-color:rgba(255,71,87,0.25)">
       <div class="okr-dept-header"><div class="okr-dept-obj">Underwrite consistently to an MAO of $45K fee across all deals</div><div class="okr-dept-score" style="color:var(--muted)">0% (Obj)</div></div>
@@ -992,6 +1194,38 @@
 <div id="page-fieldops" class="page">
 <div class="container">
   <div class="sec">
+
+  <!-- Q4 vs Q1 Comparison -->
+  <div class="qoq-panel">
+    <div class="qoq-header">
+      <div class="qoq-title">Q4 2025 vs Q1 2026 — Field Ops OKR Comparison</div>
+      <div class="qoq-legend">
+        <div class="qoq-leg"><div class="qoq-dot" style="background:var(--muted)"></div>Q4 Actual</div>
+        <div class="qoq-leg"><div class="qoq-dot" style="background:var(--accent)"></div>Q1 Actual</div>
+      </div>
+    </div>
+    <div style="padding:10px 12px;background:rgba(79,90,110,0.08);border:1px solid rgba(79,90,110,0.2);border-radius:7px;font-size:11px;color:var(--mid);">
+      <strong style="color:var(--text)">Note:</strong> The Field Operations tab in the Q4 OKR tracker does not include a Q4 column — only Actual (Q1), Goal, and Grade are tracked for this department. Q4 baseline data is not available for direct comparison. All values below reflect Q1 2026 performance only.
+    </div>
+    <table class="qoq-table" style="margin-top:12px;">
+      <thead><tr><th>Key Result</th><th>Goal</th><th>Q4 Act.</th><th>Q1 Act.</th><th>Q1 Grade</th><th>Progress</th></tr></thead>
+      <tbody>
+        <tr><td>Savings Per Property</td><td>$500</td><td class="q4v">—</td><td class="q1v" style="color:var(--danger)">$245.89</td><td><span class="f-grade fg-f" style="font-size:12px;font-family:'Bebas Neue'">49% ✗</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:49%;background:var(--danger)"></div></div></div></div></td></tr>
+        <tr><td>Door Knocking (325 doors)</td><td>325</td><td class="q4v">—</td><td class="q1v" style="color:var(--danger)">94</td><td><span class="f-grade fg-f" style="font-size:12px;font-family:'Bebas Neue'">29% ✗</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:29%;background:var(--danger)"></div></div></div></div></td></tr>
+        <tr><td>Inspection Pass Rate</td><td>90%</td><td class="q4v">—</td><td class="q1v" style="color:var(--accent)">100%</td><td><span class="f-grade fg-a" style="font-size:12px;font-family:'Bebas Neue'">A ✓</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td></tr>
+        <tr><td>Tenant Relocation (Days)</td><td>30 days</td><td class="q4v">—</td><td class="q1v" style="color:var(--accent)">30 days</td><td><span class="f-grade fg-a" style="font-size:12px;font-family:'Bebas Neue'">A ✓</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td></tr>
+        <tr><td>Junk Removal Cost Reduction</td><td>25%</td><td class="q4v">—</td><td class="q1v" style="color:var(--accent)">35.40%</td><td><span class="f-grade fg-a" style="font-size:12px;font-family:'Bebas Neue'">A ✓</span></td>
+          <td><div class="qoq-bar-pair"><div class="qoq-bar-row"><div class="qoq-bar-lbl">Q1</div><div class="qoq-bar-bg"><div class="qoq-bar-fill" style="width:100%;background:var(--accent)"></div></div></div></div></td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px;padding:9px 12px;background:var(--surface2);border-radius:6px;font-size:11px;color:var(--mid);line-height:1.65;">
+      <strong style="color:var(--text)">Q2 recommendation:</strong> Add a Q4 actuals column to the Field Ops OKR tracker so quarter-over-quarter comparison is possible. Door knocking (29% of target) and savings per property (49%) are persistent gaps that need baseline tracking to show trend direction.
+    </div>
+  </div>
     <div class="sec-head"><span class="sec-label">Field Operations OKRs — Q1 2026</span><div class="sec-line"></div></div>
     <div class="okr-dept" style="border-color:rgba(232,197,71,0.3)">
       <div class="okr-dept-header"><div class="okr-dept-obj">Drive faster deal closing through streamlined field operations and tighter cost controls</div><div class="okr-dept-score" style="color:var(--accent2)">Mixed</div></div>
