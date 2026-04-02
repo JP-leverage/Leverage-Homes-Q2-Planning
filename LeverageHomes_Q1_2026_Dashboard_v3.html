@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leverage Homes · Q1 2026 Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #090b0e;
+    --surface: #101419;
+    --surface2: #161b22;
+    --border: #1c2230;
+    --accent: #00c896;
+    --accent2: #e8c547;
+    --danger: #ff4757;
+    --warn: #ff9f43;
+    --blue: #4d9ef7;
+    --purple: #a29bfe;
+    --pink: #fd79a8;
+    --text: #dde4f0;
+    --muted: #4f5a6e;
+    --mid: #7f8ea8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.5; }
+
+  .header {
+    background: rgba(16,20,25,0.96); border-bottom: 1px solid var(--border);
+    padding: 18px 32px; display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100; backdrop-filter: blur(16px);
+  }
+  .header-left { display: flex; align-items: center; gap: 14px; }
+  .logo { width: 40px; height: 40px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue'; font-size: 20px; color: var(--bg); }
+  .h-title { font-family: 'Bebas Neue'; font-size: 24px; letter-spacing: 2px; }
+  .h-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+  .h-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .badge { font-size: 10px; font-weight: 600; padding: 4px 11px; border-radius: 20px; letter-spacing: 0.8px; text-transform: uppercase; }
+  .badge-green { background: rgba(0,200,150,0.1); border: 1px solid rgba(0,200,150,0.25); color: var(--accent); }
+  .dq-pill { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; color: var(--muted); background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 3px 9px; font-family: 'DM Mono'; }
+  .dq-dot { width: 5px; height: 5px; border-radius: 50%; }
+
+  .container { max-width: 1440px; margin: 0 auto; padding: 26px 32px; }
+  .sec { margin-top: 30px; }
+  .sec:first-child { margin-top: 0; }
+  .sec-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .sec-label { font-family: 'Bebas Neue'; font-size: 12px; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; white-space: nowrap; }
+  .sec-line { flex: 1; height: 1px; background: var(--border); }
+  .sec-note { font-size: 10px; color: var(--muted); font-family: 'DM Mono'; white-space: nowrap; }
+
+  .g4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+  .g3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .g65 { display: grid; grid-template-columns: 1.7fr 1fr; gap: 12px; }
+
+  .kcard { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; position: relative; overflow: hidden; }
+  .kcard::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+  .kcard.g::before { background: var(--accent); }
+  .kcard.r::before { background: var(--danger); }
+  .kcard.y::before { background: var(--accent2); }
+  .kcard.w::before { background: var(--warn); }
+  .kcard.b::before { background: var(--blue); }
+  .kc-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.9px; font-weight: 600; margin-bottom: 7px; }
+  .kc-val { font-family: 'Bebas Neue'; font-size: 34px; letter-spacing: 0.5px; line-height: 1; margin-bottom: 5px; }
+  .kc-meta { display: flex; align-items: center; gap: 7px; }
+  .kc-tgt { font-size: 11px; color: var(--muted); }
+  .chip { font-size: 10px; font-weight: 600; font-family: 'DM Mono'; padding: 1px 6px; border-radius: 3px; }
+  .chip-g { background: rgba(0,200,150,0.12); color: var(--accent); }
+  .chip-r { background: rgba(255,71,87,0.12); color: var(--danger); }
+  .chip-y { background: rgba(232,197,71,0.12); color: var(--accent2); }
+  .chip-w { background: rgba(255,159,67,0.12); color: var(--warn); }
+  .chip-b { background: rgba(77,158,247,0.12); color: var(--blue); }
+  .bar-track { height: 3px; background: var(--border); border-radius: 2px; margin-top: 9px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 2px; }
+
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .p-title { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.2px; font-weight: 600; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
+
+  .trow { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(28,34,48,0.8); }
+  .trow:last-child { border-bottom: none; padding-bottom: 0; }
+  .tr-name { flex: 1; font-size: 12px; color: var(--mid); }
+  .tr-val { font-family: 'DM Mono'; font-size: 12px; color: var(--text); min-width: 85px; text-align: right; }
+  .tr-sub { font-size: 10px; color: var(--muted); }
+
+  .srow { display: flex; align-items: center; gap: 9px; padding: 6px 0; border-bottom: 1px solid rgba(28,34,48,0.7); }
+  .srow:last-child { border-bottom: none; }
+  .sdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .sname { flex: 1; font-size: 12px; color: var(--mid); }
+  .sval { font-family: 'DM Mono'; font-size: 12px; color: var(--text); }
+  .spct { font-family: 'DM Mono'; font-size: 11px; color: var(--muted); width: 34px; text-align: right; }
+
+  .vrow { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(28,34,48,0.7); }
+  .vrow:last-child { border-bottom: none; }
+  .vname { flex: 1; font-size: 13px; color: var(--text); font-weight: 500; }
+  .vnum { font-family: 'Bebas Neue'; font-size: 22px; color: var(--accent); width: 32px; text-align: right; }
+  .vsub { font-family: 'DM Mono'; font-size: 11px; color: var(--muted); width: 50px; text-align: right; }
+  .vbar-wrap { width: 70px; }
+  .vbar { height: 3px; background: var(--border); border-radius: 2px; }
+  .vbar-fill { height: 100%; background: var(--accent); border-radius: 2px; }
+
+  .fstep { display: flex; align-items: center; gap: 12px; padding: 9px 12px; background: var(--surface2); border-radius: 7px; margin-bottom: 5px; border-left: 3px solid var(--border); }
+  .ficon { font-size: 16px; width: 24px; text-align: center; flex-shrink: 0; }
+  .finfo { flex: 1; }
+  .fstage { font-size: 11px; color: var(--muted); }
+  .fcount { font-family: 'Bebas Neue'; font-size: 26px; color: var(--text); letter-spacing: 0.5px; line-height: 1; }
+  .fcvr { font-family: 'DM Mono'; font-size: 10px; }
+
+  .trend-bars { display: flex; align-items: flex-end; gap: 3px; height: 48px; }
+  .t-bar { flex: 1; border-radius: 2px 2px 0 0; min-height: 2px; cursor: default; }
+  .trend-lbls { display: flex; gap: 3px; margin-top: 4px; }
+  .t-lbl { flex: 1; text-align: center; font-size: 8px; color: var(--muted); }
+
+  .txbar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .txbar-lbl { font-size: 11px; color: var(--mid); width: 145px; flex-shrink: 0; }
+  .txbar-track { flex: 1; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .txbar-fill { height: 100%; border-radius: 3px; }
+  .txbar-val { font-family: 'DM Mono'; font-size: 11px; color: var(--text); width: 28px; text-align: right; }
+  .txbar-pct { font-family: 'DM Mono'; font-size: 10px; color: var(--muted); width: 32px; text-align: right; }
+
+  /* Appt type ring visual */
+  .appt-ring { display: flex; align-items: center; justify-content: center; margin: 10px 0; }
+  .ring-seg { height: 10px; border-radius: 2px; }
+  .appt-legend { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .leg-row { display: flex; align-items: center; gap: 8px; }
+  .leg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .leg-name { flex: 1; font-size: 12px; color: var(--mid); }
+  .leg-val { font-family: 'DM Mono'; font-size: 12px; color: var(--text); }
+  .leg-pct { font-family: 'DM Mono'; font-size: 11px; color: var(--muted); width: 38px; text-align: right; }
+
+  /* Outcome boxes */
+  .outcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+  .oi { background: var(--surface2); border-radius: 7px; padding: 10px 12px; }
+  .oi-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 3px; }
+  .oi-val { font-family: 'Bebas Neue'; font-size: 24px; letter-spacing: 0.5px; }
+  .oi-pct { font-family: 'DM Mono'; font-size: 11px; color: var(--muted); }
+
+  .alert { border-radius: 7px; padding: 11px 14px; font-size: 12px; margin-bottom: 8px; display: flex; gap: 9px; align-items: flex-start; }
+  .alert:last-child { margin-bottom: 0; }
+  .ai { font-size: 15px; flex-shrink: 0; }
+  .at { color: var(--mid); line-height: 1.65; }
+  .at strong { color: var(--text); }
+  .alert.r { background: rgba(255,71,87,0.05); border: 1px solid rgba(255,71,87,0.18); }
+  .alert.g { background: rgba(0,200,150,0.05); border: 1px solid rgba(0,200,150,0.18); }
+  .alert.w { background: rgba(255,159,67,0.05); border: 1px solid rgba(255,159,67,0.18); }
+  .alert.b { background: rgba(77,158,247,0.05); border: 1px solid rgba(77,158,247,0.18); }
+
+  .insight { background: linear-gradient(135deg,rgba(0,200,150,0.07),rgba(0,200,150,0.02)); border: 1px solid rgba(0,200,150,0.18); border-radius: 9px; padding: 14px 16px; margin-bottom: 9px; }
+  .insight-t { font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 6px; }
+  .insight-b { font-size: 12px; color: var(--mid); line-height: 1.75; }
+  .insight-y { background: linear-gradient(135deg,rgba(232,197,71,0.07),rgba(232,197,71,0.02)); border-color: rgba(232,197,71,0.18); }
+  .insight-y .insight-t { color: var(--accent2); }
+  .insight-b { font-size: 12px; color: var(--mid); line-height: 1.75; }
+
+  .okr-block { background: var(--surface2); border: 1px solid var(--border); border-radius: 9px; padding: 14px 16px; margin-bottom: 9px; }
+  .okr-obj { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .okr-kr { display: flex; align-items: center; gap: 10px; padding: 5px 0; border-bottom: 1px solid rgba(28,34,48,0.6); }
+  .okr-kr:last-child { border-bottom: none; padding-bottom: 0; }
+  .okr-kname { flex: 1; font-size: 11px; color: var(--mid); }
+  .okr-kval { font-family: 'DM Mono'; font-size: 11px; }
+
+  .wtable { width: 100%; border-collapse: collapse; }
+  .wtable th { font-size: 9px; color: var(--muted); text-align: center; padding: 4px 3px; letter-spacing: 0.4px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  .wtable th.lh { text-align: left; padding-left: 0; }
+  .wtable td { text-align: center; padding: 5px 3px; font-size: 10px; font-family: 'DM Mono'; color: var(--mid); border-bottom: 1px solid rgba(28,34,48,0.5); }
+  .wtable td.lh { text-align: left; font-family: 'DM Sans'; font-size: 11px; color: var(--mid); padding-left: 0; }
+  .wtable td.hi { color: var(--accent); font-weight: 500; }
+  .wtable td.lo { color: var(--danger); }
+  .wtable td.tot { font-weight: 600; color: var(--text); }
+
+  /* Highlight callout box */
+  .callout { display: flex; gap: 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 12px; }
+  .callout-col { flex: 1; padding: 16px 18px; background: var(--surface); border-right: 1px solid var(--border); }
+  .callout-col:last-child { border-right: none; }
+  .cc-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.9px; font-weight: 600; margin-bottom: 6px; }
+  .cc-val { font-family: 'Bebas Neue'; font-size: 28px; letter-spacing: 0.5px; line-height: 1; }
+  .cc-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+  .footer { border-top: 1px solid var(--border); padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; margin-top: 36px; }
+  .footer-l { font-size: 11px; color: var(--muted); }
+  .footer-r { font-size: 10px; color: var(--muted); font-family: 'DM Mono'; text-align: right; }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+  .kcard { animation: fadeUp 0.35s ease both; }
+  .kcard:nth-child(1){animation-delay:.04s} .kcard:nth-child(2){animation-delay:.08s}
+  .kcard:nth-child(3){animation-delay:.12s} .kcard:nth-child(4){animation-delay:.16s}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="logo">LH</div>
+    <div>
+      <div class="h-title">Leverage Homes</div>
+      <div class="h-sub">Q1 2026 Performance Dashboard · January 1 – March 31, 2026</div>
+    </div>
+  </div>
+  <div class="h-right">
+    <span class="dq-pill"><span class="dq-dot" style="background:var(--accent)"></span>Tests removed · IDs deduplicated</span>
+    <span class="dq-pill"><span class="dq-dot" style="background:var(--accent2)"></span>Revenue = Total Net Revenue (actuals)</span>
+    <span class="badge badge-green">Q1 Verified</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ═══ Q1 PIPELINE SUMMARY ═══ -->
+  <div class="sec">
+    <div class="sec-head">
+      <span class="sec-label">Q1 Pipeline Summary</span>
+      <div class="sec-line"></div>
+      <span class="sec-note">Verified · Total Net Revenue = Actual Closed</span>
+    </div>
+
+    <!-- CALLOUT ROW -->
+    <div class="callout">
+      <div class="callout-col">
+        <div class="cc-lbl">Q1 Day One Pipeline</div>
+        <div class="cc-val" style="color:var(--blue)">$850,000</div>
+        <div class="cc-sub">Starting pipeline value Jan 1</div>
+      </div>
+      <div class="callout-col">
+        <div class="cc-lbl">Deals In (to ARIP)</div>
+        <div class="cc-val" style="color:var(--text)">86</div>
+        <div class="cc-sub">Unique contracts signed</div>
+      </div>
+      <div class="callout-col">
+        <div class="cc-lbl">Deals Out</div>
+        <div class="cc-val" style="color:var(--text)">61</div>
+        <div class="cc-sub">Progressed through pipeline</div>
+      </div>
+      <div class="callout-col">
+        <div class="cc-lbl">Pull Through Rate</div>
+        <div class="cc-val" style="color:var(--accent2)">70.93%</div>
+        <div class="cc-sub">61 / 86 · Target 70% ✓</div>
+      </div>
+      <div class="callout-col">
+        <div class="cc-lbl">Projected Out Value</div>
+        <div class="cc-val" style="color:var(--purple)">$2.59M</div>
+        <div class="cc-sub">$2,587,669.59 projected</div>
+      </div>
+    </div>
+
+    <div class="g4">
+      <div class="kcard g">
+        <div class="kc-lbl">Revenue Closed (Actual)</div>
+        <div class="kc-val" style="color:var(--accent)">$1.22M</div>
+        <div class="kc-meta"><span class="kc-tgt">$1,223,011.64 · Target $1.1M</span><span class="chip chip-g">111% ✓</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--accent)"></div></div>
+      </div>
+      <div class="kcard y">
+        <div class="kc-lbl">Average Fee Size</div>
+        <div class="kc-val" style="color:var(--accent2)">$37,061</div>
+        <div class="kc-meta"><span class="kc-tgt">Target &gt;$40K</span><span class="chip chip-r">93% ✗</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:93%;background:var(--warn)"></div></div>
+      </div>
+      <div class="kcard w">
+        <div class="kc-lbl">Deals Closed (Unique)</div>
+        <div class="kc-val" style="color:var(--text)">33</div>
+        <div class="kc-meta"><span class="kc-tgt">Verified · 0 test records</span><span class="chip chip-g">Clean</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:85%;background:var(--warn)"></div></div>
+      </div>
+      <div class="kcard b">
+        <div class="kc-lbl">Q2 Pipeline (Carried Over)</div>
+        <div class="kc-val" style="color:var(--blue)">$1.35M</div>
+        <div class="kc-meta"><span class="kc-tgt">$1,353,000 entering Q2</span><span class="chip chip-b">→Q2</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:68%;background:var(--blue)"></div></div>
+      </div>
+    </div>
+
+    <!-- Same Quarter Close insight -->
+    <div style="margin-top:12px;" class="g3">
+      <div class="panel">
+        <div class="p-title">Same Quarter Close</div>
+        <div class="trow"><div class="tr-name">Deals closed same quarter sourced</div><div class="tr-val" style="color:var(--accent)">13</div></div>
+        <div class="trow"><div class="tr-name">Same-quarter revenue</div><div class="tr-val" style="color:var(--accent)">$373,093</div></div>
+        <div class="trow"><div class="tr-name">Same-quarter close rate</div><div class="tr-val" style="color:var(--accent2)">15.12%</div></div>
+        <div class="trow"><div class="tr-name">Avg fee (same-qtr closes)</div><div class="tr-val">$35,000</div></div>
+        <div class="trow" style="border:none;padding-top:4px;"><div class="tr-name" style="font-size:10px;color:var(--muted);font-style:italic;">20 of 33 deals were sourced in prior quarters</div></div>
+      </div>
+      <div class="panel">
+        <div class="p-title">Revenue Closed by VP</div>
+        <div class="vrow"><div class="vname">Sam Dogbe</div><div class="vbar-wrap"><div class="vbar"><div class="vbar-fill" style="width:100%"></div></div></div><div class="vnum">13</div><div class="vsub">39%</div></div>
+        <div class="vrow"><div class="vname">Joey Szal</div><div class="vbar-wrap"><div class="vbar"><div class="vbar-fill" style="width:77%"></div></div></div><div class="vnum">10</div><div class="vsub">30%</div></div>
+        <div class="vrow"><div class="vname">Ray O'Donnell</div><div class="vbar-wrap"><div class="vbar"><div class="vbar-fill" style="width:46%"></div></div></div><div class="vnum">6</div><div class="vsub">18%</div></div>
+        <div class="vrow"><div class="vname">David Choi</div><div class="vbar-wrap"><div class="vbar"><div class="vbar-fill" style="width:31%"></div></div></div><div class="vnum">4</div><div class="vsub">12%</div></div>
+        <div class="vrow"><div class="vname">Other</div><div class="vbar-wrap"><div class="vbar"><div class="vbar-fill" style="width:0%"></div></div></div><div class="vnum" style="font-size:16px;color:var(--mid)">0</div><div class="vsub">—</div></div>
+      </div>
+      <div class="panel">
+        <div class="p-title">Weekly Closed Revenue</div>
+        <div class="trend-bars" id="rev-bars"></div>
+        <div class="trend-lbls" id="rev-lbls"></div>
+        <div style="display:flex;gap:14px;margin-top:10px;flex-wrap:wrap;">
+          <div><div class="kc-lbl">Peak</div><div style="font-family:'DM Mono';font-size:11px;color:var(--accent)">03/22 · $280K</div></div>
+          <div><div class="kc-lbl">Low</div><div style="font-family:'DM Mono';font-size:11px;color:var(--danger)">01/18 · $7.6K</div></div>
+          <div><div class="kc-lbl">Q1 Avg/Wk</div><div style="font-family:'DM Mono';font-size:11px;color:var(--mid)">$84.6K</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ DEAL COMPOSITION ═══ -->
+  <div class="sec">
+    <div class="sec-head">
+      <span class="sec-label">Deal Composition</span>
+      <div class="sec-line"></div>
+      <span class="sec-note">86 deals in · 71 unique deal review · 33 closed</span>
+    </div>
+    <div class="g2">
+      <div class="panel">
+        <div class="p-title">Transaction Types — ARIP (86 Deals In)</div>
+        <div class="txbar-row"><div class="txbar-lbl">Novation</div><div class="txbar-track"><div class="txbar-fill" style="width:100%;background:var(--accent)"></div></div><div class="txbar-val">43</div><div class="txbar-pct">50%</div></div>
+        <div class="txbar-row"><div class="txbar-lbl">Assignment</div><div class="txbar-track"><div class="txbar-fill" style="width:51%;background:var(--blue)"></div></div><div class="txbar-val">22</div><div class="txbar-pct">26%</div></div>
+        <div class="txbar-row"><div class="txbar-lbl">Fix &amp; Flip</div><div class="txbar-track"><div class="txbar-fill" style="width:30%;background:var(--accent2)"></div></div><div class="txbar-val">13</div><div class="txbar-pct">15%</div></div>
+        <div class="txbar-row"><div class="txbar-lbl">Double Close (Retail)</div><div class="txbar-track"><div class="txbar-fill" style="width:7%;background:var(--purple)"></div></div><div class="txbar-val">3</div><div class="txbar-pct">3%</div></div>
+        <div class="txbar-row"><div class="txbar-lbl">LLC Buyout / Other</div><div class="txbar-track"><div class="txbar-fill" style="width:6%;background:var(--muted)"></div></div><div class="txbar-val">5</div><div class="txbar-pct">6%</div></div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+          <div class="trow"><div class="tr-name">Lead Source — #1 (ARIP)</div><div class="tr-val">Call Center</div><div class="chip chip-g">43 · 50%</div></div>
+          <div class="trow"><div class="tr-name">Lead Source — #2 (ARIP)</div><div class="tr-val">Text Campaign</div><div class="chip chip-w">13 · 15%</div></div>
+          <div class="trow"><div class="tr-name">Lead Source — #1 (Closed)</div><div class="tr-val">Call Center</div><div class="chip chip-g">11 · 33%</div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="p-title">Pipeline Flow — Q1</div>
+        <div class="fstep" style="border-left-color:var(--blue)">
+          <div class="ficon">📥</div>
+          <div class="finfo"><div class="fstage">Q1 Day One Pipeline</div><div class="fcount">$850K</div></div>
+          <div class="fcvr" style="color:var(--blue)">Starting Value</div>
+        </div>
+        <div style="text-align:center;color:var(--muted);margin:2px 0;font-size:14px">↓</div>
+        <div class="fstep" style="border-left-color:var(--accent2)">
+          <div class="ficon">📝</div>
+          <div class="finfo"><div class="fstage">Deals In (Signed to ARIP)</div><div class="fcount">86</div></div>
+          <div class="fcvr" style="color:var(--accent2)">Contracts Executed</div>
+        </div>
+        <div style="text-align:center;color:var(--muted);margin:2px 0;font-size:14px">↓</div>
+        <div class="fstep" style="border-left-color:var(--warn)">
+          <div class="ficon">🔄</div>
+          <div class="finfo"><div class="fstage">Deals Out (Post ARIP)</div><div class="fcount">61 <span style="font-size:13px;font-family:'DM Sans';color:var(--muted)">— 70.93%</span></div></div>
+          <div class="fcvr" style="color:var(--accent)">Target 70% ✓</div>
+        </div>
+        <div style="text-align:center;color:var(--muted);margin:2px 0;font-size:14px">↓</div>
+        <div class="fstep" style="border-left-color:var(--accent)">
+          <div class="ficon">💰</div>
+          <div class="finfo"><div class="fstage">Deals Closed</div><div class="fcount">33 <span style="font-size:13px;font-family:'DM Sans';color:var(--muted)">— $1.22M</span></div></div>
+          <div class="fcvr" style="color:var(--accent)">Avg $37,061/deal</div>
+        </div>
+        <div style="text-align:center;color:var(--muted);margin:2px 0;font-size:14px">↓</div>
+        <div class="fstep" style="border-left-color:var(--blue)">
+          <div class="ficon">➡️</div>
+          <div class="finfo"><div class="fstage">Q2 Pipeline (Remaining)</div><div class="fcount">$1.35M</div></div>
+          <div class="fcvr" style="color:var(--blue)">$1,353,000 carried</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MARKETING ═══ -->
+  <div class="sec">
+    <div class="sec-head">
+      <span class="sec-label">Marketing & Lead Generation</span>
+      <div class="sec-line"></div>
+      <span class="sec-note">Scorecard KPIs · DealSignals (2,739) excluded — list import only</span>
+    </div>
+    <div class="g4" style="margin-bottom:12px;">
+      <div class="kcard w">
+        <div class="kc-lbl">Total Leads Created</div>
+        <div class="kc-val" style="color:var(--text)">2,173</div>
+        <div class="kc-meta"><span class="kc-tgt">Target 2,561</span><span class="chip chip-w">85%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:85%;background:var(--warn)"></div></div>
+      </div>
+      <div class="kcard g">
+        <div class="kc-lbl">Text / SMS Leads</div>
+        <div class="kc-val" style="color:var(--accent)">907</div>
+        <div class="kc-meta"><span class="kc-tgt">Target 650</span><span class="chip chip-g">139% ✓</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--accent)"></div></div>
+      </div>
+      <div class="kcard r">
+        <div class="kc-lbl">Call Center Leads</div>
+        <div class="kc-val" style="color:var(--danger)">1,043</div>
+        <div class="kc-meta"><span class="kc-tgt">Target 2,600</span><span class="chip chip-r">40% ✗</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:40%;background:var(--danger)"></div></div>
+      </div>
+      <div class="kcard r">
+        <div class="kc-lbl">Direct Mail Leads</div>
+        <div class="kc-val" style="color:var(--danger)">10</div>
+        <div class="kc-meta"><span class="kc-tgt">Target 338</span><span class="chip chip-r">3% ✗</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:3%;background:var(--danger)"></div></div>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="panel">
+        <div class="p-title">Lead Source — Closed Deals (33 Unique)</div>
+        <div class="srow"><div class="sdot" style="background:var(--accent)"></div><div class="sname">Call Center</div><div class="sval">11</div><div class="spct">33%</div></div>
+        <div class="srow"><div class="sdot" style="background:var(--accent2)"></div><div class="sname">Text Message Campaign</div><div class="sval">5</div><div class="spct">15%</div></div>
+        <div class="srow"><div class="sdot" style="background:var(--purple)"></div><div class="sname">Referral</div><div class="sval">4</div><div class="spct">12%</div></div>
+        <div class="srow"><div class="sdot" style="background:var(--pink)"></div><div class="sname">Direct Mail Campaign</div><div class="sval">3</div><div class="spct">9%</div></div>
+        <div class="srow"><div class="sdot" style="background:var(--blue)"></div><div class="sname">Deals &amp; Dollars / RPEC</div><div class="sval">3</div><div class="spct">9%</div></div>
+        <div class="srow"><div class="sdot" style="background:var(--mid)"></div><div class="sname">Internal CC / PPL / Other</div><div class="sval">7</div><div class="spct">21%</div></div>
+      </div>
+      <div class="panel">
+        <div class="p-title">Conversion Metrics</div>
+        <div class="trow"><div class="tr-name">Unique Opps Created (CRM)</div><div class="tr-val">1,155</div><div class="chip chip-w">vs 1,755</div></div>
+        <div class="trow"><div class="tr-name">Leads Converted to Opps</div><div class="tr-val">1,997</div><div class="chip chip-g">Unique</div></div>
+        <div class="trow"><div class="tr-name">Avg Calls to Lead Ratio</div><div class="tr-val">~3,010</div><div class="chip chip-r">&gt;1,910</div></div>
+        <div class="trow"><div class="tr-name">DealSignals (list import)</div><div class="tr-val">2,739</div><div class="chip" style="background:rgba(79,90,110,0.2);color:var(--muted)">Excl.</div></div>
+        <div class="alert w" style="margin-top:10px;margin-bottom:0;">
+          <div class="ai">⚠</div>
+          <div class="at"><strong>Call Center at 40% of target</strong> is the most critical gap. It's also the #1 source for both ARIP (50%) and closed deals (33%).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ACQUISITIONS & APPOINTMENTS ═══ -->
+  <div class="sec">
+    <div class="sec-head">
+      <span class="sec-label">Acquisitions & Appointments</span>
+      <div class="sec-line"></div>
+      <span class="sec-note">Appointments Set (excl. Brian) · 2,291 unique verified</span>
+    </div>
+
+    <div class="g4" style="margin-bottom:12px;">
+      <div class="kcard g">
+        <div class="kc-lbl">Follow-Up Appts Set</div>
+        <div class="kc-val" style="color:var(--accent)">833</div>
+        <div class="kc-meta"><span class="kc-tgt">42.67% of total · Target 403</span><span class="chip chip-g">207% ✓</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--accent)"></div></div>
+      </div>
+      <div class="kcard w">
+        <div class="kc-lbl">In-Person Appts Set</div>
+        <div class="kc-val" style="color:var(--text)">380</div>
+        <div class="kc-meta"><span class="kc-tgt">19.47% of total · Target 300</span><span class="chip chip-g">127% ✓</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--warn)"></div></div>
+      </div>
+      <div class="kcard r">
+        <div class="kc-lbl">Virtual Appts Set</div>
+        <div class="kc-val" style="color:var(--danger)">739</div>
+        <div class="kc-meta"><span class="kc-tgt">37.86% of total · Target 1,300</span><span class="chip chip-r">57% ✗</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:57%;background:var(--danger)"></div></div>
+      </div>
+      <div class="kcard w">
+        <div class="kc-lbl">Total Appts Set (excl. Brian)</div>
+        <div class="kc-val" style="color:var(--text)">1,952</div>
+        <div class="kc-meta"><span class="kc-tgt">833 + 380 + 739</span><span class="chip chip-w">Verified</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:75%;background:var(--warn)"></div></div>
+      </div>
+    </div>
+
+    <div class="g65">
+      <div class="panel">
+        <div class="p-title">Appointment Funnel — Q1 2026 <span style="font-size:9px;color:var(--muted)">excl. Brian · 2,291 unique</span></div>
+        <div class="fstep" style="border-left-color:var(--blue)">
+          <div class="ficon">📋</div>
+          <div class="finfo"><div class="fstage">Unique Opportunities Created</div><div class="fcount">1,155</div></div>
+          <div class="fcvr" style="color:var(--blue)">CRM · clean</div>
+        </div>
+        <div style="text-align:center;color:var(--muted);margin:2px 0;font-size:14px">↓</div>
+        <div class="fstep">
+          <div class="ficon">📅</div>
+          <div class="finfo">
+            <div class="fstage">Total Appts Set (excl. Brian)</div>
+            <div class="fcount">1,952 <span style="font-size:12px;font-family:'DM Sans';color:var(--muted)">FU:833 IP:380 V:739</span></div>
+          </div>
+          <div class="fcvr" style="color:var(--mid)">169% of opps</div>
+        </div>
+        <div style="text-align:center;color:var(--muted);margin:2px 0;font-size:14px">↓</div>
+        <div class="fstep" style="border-left-color:var(--accent2)">
+          <div class="ficon">✅</div>
+          <div class="finfo">
+            <div class="fstage">Appointments Attended (Met)</div>
+            <div class="fcount">1,419 <span style="font-size:12px;font-family:'DM Sans';color:var(--muted)">of 2,291</span></div>
+          </div>
+          <div class="fcvr" style="color:var(--accent2)">61.9% show rate</div>
+        </div>
+        <div style="text-align:center;color:var(--muted);margin:2px 0;font-size:14px">↓</div>
+        <div class="fstep" style="border-left-color:var(--accent2)">
+          <div class="ficon">📝</div>
+          <div class="finfo"><div class="fstage">Deals to ARIP (Signed)</div><div class="fcount">86</div></div>
+          <div class="fcvr" style="color:var(--mid)">6.1% of attended → ARIP</div>
+        </div>
+        <div style="text-align:center;color:var(--muted);margin:2px 0;font-size:14px">↓</div>
+        <div class="fstep" style="border-left-color:var(--accent)">
+          <div class="ficon">🏠</div>
+          <div class="finfo"><div class="fstage">Deals Closed</div><div class="fcount">33 <span style="font-size:12px;font-family:'DM Sans';color:var(--muted)">— $1,223,012</span></div></div>
+          <div class="fcvr" style="color:var(--accent)">38% of deals in → closed</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="panel">
+          <div class="p-title">Appt Mix (excl. Brian)</div>
+          <!-- Simple stacked bar -->
+          <div style="display:flex;height:10px;border-radius:5px;overflow:hidden;margin-bottom:12px;">
+            <div style="width:42.67%;background:var(--pink)"></div>
+            <div style="width:19.47%;background:var(--accent2)"></div>
+            <div style="width:37.86%;background:var(--blue)"></div>
+          </div>
+          <div class="leg-row"><div class="leg-dot" style="background:var(--pink)"></div><div class="leg-name">Follow-Up</div><div class="leg-val">833</div><div class="leg-pct">42.67%</div></div>
+          <div class="leg-row"><div class="leg-dot" style="background:var(--accent2)"></div><div class="leg-name">In-Person</div><div class="leg-val">380</div><div class="leg-pct">19.47%</div></div>
+          <div class="leg-row"><div class="leg-dot" style="background:var(--blue)"></div><div class="leg-name">Virtual</div><div class="leg-val">739</div><div class="leg-pct">37.86%</div></div>
+          <div class="leg-row" style="border-top:1px solid var(--border);margin-top:6px;padding-top:6px;"><div class="leg-dot" style="background:var(--muted)"></div><div class="leg-name" style="font-weight:600;color:var(--text)">Total</div><div class="leg-val" style="color:var(--text)">1,952</div><div class="leg-pct"></div></div>
+        </div>
+        <div class="panel">
+          <div class="p-title">Appt Outcomes <span style="font-size:9px;color:var(--muted)">(2,291 unique)</span></div>
+          <div class="outcome-grid">
+            <div class="oi"><div class="oi-lbl">Attended</div><div class="oi-val" style="color:var(--accent)">1,419</div><div class="oi-pct">61.9%</div></div>
+            <div class="oi"><div class="oi-lbl">No Show</div><div class="oi-val" style="color:var(--danger)">417</div><div class="oi-pct">18.2%</div></div>
+            <div class="oi"><div class="oi-lbl">Rescheduled</div><div class="oi-val" style="color:var(--accent2)">145</div><div class="oi-pct">6.3%</div></div>
+            <div class="oi"><div class="oi-lbl">Cancelled</div><div class="oi-val" style="color:var(--warn)">91</div><div class="oi-pct">4.0%</div></div>
+            <div class="oi"><div class="oi-lbl">VP Missed</div><div class="oi-val" style="color:var(--danger)">21</div><div class="oi-pct">0.9%</div></div>
+            <div class="oi"><div class="oi-lbl">Attn+No Show</div><div class="oi-val" style="color:var(--mid)">46</div><div class="oi-pct">2.0%</div></div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="p-title">Appts by VP</div>
+          <div class="vrow"><div class="vname">Joey Szal</div><div class="vbar-wrap"><div class="vbar"><div class="vbar-fill" style="width:100%"></div></div></div><div class="vnum">847</div><div class="vsub">37%</div></div>
+          <div class="vrow"><div class="vname">Sam Dogbe</div><div class="vbar-wrap"><div class="vbar"><div class="vbar-fill" style="width:93%"></div></div></div><div class="vnum">784</div><div class="vsub">34%</div></div>
+          <div class="vrow"><div class="vname">Ray O'Donnell</div><div class="vbar-wrap"><div class="vbar"><div class="vbar-fill" style="width:60%"></div></div></div><div class="vnum">504</div><div class="vsub">22%</div></div>
+          <div class="vrow"><div class="vname">David Choi</div><div class="vbar-wrap"><div class="vbar"><div class="vbar-fill" style="width:10%"></div></div></div><div class="vnum">84</div><div class="vsub">4%</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ BACKEND ═══ -->
+  <div class="sec">
+    <div class="sec-head">
+      <span class="sec-label">Backend & Underwriting</span>
+      <div class="sec-line"></div>
+    </div>
+    <div class="g4" style="margin-bottom:12px;">
+      <div class="kcard g">
+        <div class="kc-lbl">Pull Through Rate</div>
+        <div class="kc-val" style="color:var(--accent)">70.93%</div>
+        <div class="kc-meta"><span class="kc-tgt">61/86 · Target 70%</span><span class="chip chip-g">✓ On Target</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--accent)"></div></div>
+      </div>
+      <div class="kcard g">
+        <div class="kc-lbl">Deals to Deal Review</div>
+        <div class="kc-val" style="color:var(--accent)">71</div>
+        <div class="kc-meta"><span class="kc-tgt">Target 70</span><span class="chip chip-g">101% ✓</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--accent)"></div></div>
+      </div>
+      <div class="kcard r">
+        <div class="kc-lbl">Avg Speed to UW</div>
+        <div class="kc-val" style="color:var(--warn)">~33 <span style="font-size:18px">hrs</span></div>
+        <div class="kc-meta"><span class="kc-tgt">Target &lt;24 hrs</span><span class="chip chip-r">38% over</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:73%;background:var(--danger)"></div></div>
+      </div>
+      <div class="kcard r">
+        <div class="kc-lbl">Late UW Events — Q1</div>
+        <div class="kc-val" style="color:var(--danger)">62</div>
+        <div class="kc-meta"><span class="kc-tgt">Target &lt;13 total</span><span class="chip chip-r">5× cap</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--danger)"></div></div>
+      </div>
+    </div>
+
+    <div class="g2">
+      <div class="panel">
+        <div class="p-title">Backend Stage Summary</div>
+        <div class="trow"><div class="tr-name">Deals Into Buyer ARIP</div><div class="tr-val">31</div><div class="chip chip-w">Track</div></div>
+        <div class="trow"><div class="tr-name">Deals Into Under Contract</div><div class="tr-val">37</div><div class="chip chip-b">→Q2</div></div>
+        <div class="trow"><div class="tr-name">Avg Duration in ARIP</div><div class="tr-val">~10.5 days</div><div class="chip chip-w">⚠ vs &lt;10</div></div>
+        <div class="trow"><div class="tr-name">Avg Buyer ARIP → UC</div><div class="tr-val">9–95 days</div><div class="chip chip-r">Wide range</div></div>
+        <div class="trow"><div class="tr-name">Avg DR → Close (Assignment)</div><div class="tr-val">~89 days</div><div class="chip chip-r">2× target</div></div>
+        <div class="trow"><div class="tr-name">Avg DR → Close (Novation)</div><div class="tr-val">~48 days</div><div class="chip chip-g">✓ &lt;90</div></div>
+        <div class="trow"><div class="tr-name">Total Deals Underwritten</div><div class="tr-val">1,130</div><div class="chip chip-g">Active</div></div>
+      </div>
+      <div class="panel">
+        <div class="p-title">UW Speed — Weekly (hrs) · 24hr target</div>
+        <div class="trend-bars" id="uw-bars"></div>
+        <div class="trend-lbls" id="uw-lbls"></div>
+        <div class="alert r" style="margin-top:10px;margin-bottom:0;">
+          <div class="ai">🔴</div>
+          <div class="at"><strong>62 late UW events in Q1</strong> (5× the 13-event cap). Speed deteriorated from 23 hrs in Jan to 70 hrs by late March. Enforce 18-hr early-warning escalation in Q2.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ WEEKLY TABLE ═══ -->
+  <div class="sec">
+    <div class="sec-head">
+      <span class="sec-label">Weekly KPI Summary — All 13 Weeks</span>
+      <div class="sec-line"></div>
+    </div>
+    <div class="panel" style="overflow-x:auto;">
+      <table class="wtable">
+        <thead>
+          <tr>
+            <th class="lh" style="min-width:180px;">Metric</th>
+            <th>01/04</th><th>01/11</th><th>01/18</th><th>01/25</th>
+            <th>02/01</th><th>02/08</th><th>02/15</th><th>02/22</th>
+            <th>03/01</th><th>03/08</th><th>03/15</th><th>03/22</th><th>03/29</th>
+            <th>Q1</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="lh">📞 Total Leads</td>
+            <td>170</td><td>155</td><td>129</td><td>128</td><td>139</td><td>150</td><td>164</td><td>176</td><td class="hi">299</td><td>173</td><td>160</td><td>165</td><td>165</td><td class="tot">2,173</td>
+          </tr>
+          <tr>
+            <td class="lh">🔄 Opps Created</td>
+            <td>91</td><td>107</td><td>90</td><td>70</td><td>84</td><td>100</td><td>80</td><td>74</td><td class="hi">132</td><td>108</td><td>94</td><td>102</td><td>—</td><td class="tot">1,234</td>
+          </tr>
+          <tr>
+            <td class="lh">🏠 In-Person Set</td>
+            <td>25</td><td>20</td><td>19</td><td>18</td><td>18</td><td>18</td><td>30</td><td>18</td><td>18</td><td>20</td><td>27</td><td class="hi">32</td><td>—</td><td class="tot">263→380</td>
+          </tr>
+          <tr>
+            <td class="lh">📅 Virtual Set</td>
+            <td class="lo">26</td><td>70</td><td>75</td><td>72</td><td class="hi">108</td><td>98</td><td>74</td><td>70</td><td>79</td><td>81</td><td>68</td><td>65</td><td>—</td><td class="tot">739</td>
+          </tr>
+          <tr>
+            <td class="lh">📝 Deals to ARIP</td>
+            <td>8</td><td class="hi">10</td><td>3</td><td>6</td><td>9</td><td class="hi">10</td><td class="hi">10</td><td>5</td><td>8</td><td>7</td><td>8</td><td>6</td><td>—</td><td class="tot">86</td>
+          </tr>
+          <tr>
+            <td class="lh">📋 Deals to Deal Review</td>
+            <td class="hi">8</td><td>3</td><td>3</td><td class="lo">0</td><td>6</td><td class="hi">13</td><td>7</td><td>3</td><td>4</td><td>7</td><td>6</td><td>6</td><td>6</td><td class="tot">71</td>
+          </tr>
+          <tr>
+            <td class="lh">💰 Closed Revenue</td>
+            <td>$57K</td><td>$13K</td><td class="lo">$8K</td><td>$15K</td><td>$9K</td><td class="hi">$180K</td><td>$66K</td><td>$51K</td><td>$32K</td><td>$10K</td><td>$107K</td><td class="hi">$280K</td><td>—</td><td class="tot">$1.22M</td>
+          </tr>
+          <tr>
+            <td class="lh">⚡ UW Speed (hrs)</td>
+            <td class="hi">23</td><td>35</td><td class="hi">23</td><td>36</td><td>41</td><td class="hi">23</td><td>27</td><td>37</td><td>31</td><td>34</td><td>47</td><td class="lo">70</td><td>—</td><td class="tot">33 avg</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ OKRs ═══ -->
+  <div class="sec">
+    <div class="sec-head">
+      <span class="sec-label">Q1 2026 OKRs vs Actuals</span>
+      <div class="sec-line"></div>
+    </div>
+    <div class="g2">
+      <div style="display:flex;flex-direction:column;gap:9px;">
+        <div class="okr-block" style="border-color:rgba(0,200,150,0.25)">
+          <div class="okr-obj">🎯 O1 · Close $1.1M in Net Revenue</div>
+          <div class="okr-kr"><div class="okr-kname">Total Net Revenue (Actual Closed)</div><div class="okr-kval" style="color:var(--accent)">$1,223,011.64 ✓ (111%)</div></div>
+          <div class="okr-kr"><div class="okr-kname">Avg Fee Per Deal</div><div class="okr-kval" style="color:var(--danger)">$37,061 vs &gt;$40K ✗</div></div>
+          <div class="okr-kr"><div class="okr-kname">Deals Closed (Unique)</div><div class="okr-kval" style="color:var(--text)">33 verified</div></div>
+          <div class="okr-kr"><div class="okr-kname">Same-Quarter Closes</div><div class="okr-kval" style="color:var(--accent2)">13 · $373,093 · 15.12%</div></div>
+        </div>
+        <div class="okr-block" style="border-color:rgba(255,71,87,0.2)">
+          <div class="okr-obj">🎯 O2 · 2,561 Qualified Leads</div>
+          <div class="okr-kr"><div class="okr-kname">Total Active Leads (excl. DealSignals)</div><div class="okr-kval" style="color:var(--warn)">2,173 / 2,561 (85%) ⚠</div></div>
+          <div class="okr-kr"><div class="okr-kname">Text / SMS Leads</div><div class="okr-kval" style="color:var(--accent)">907 / 650 (139%) ✓</div></div>
+          <div class="okr-kr"><div class="okr-kname">Call Center Leads</div><div class="okr-kval" style="color:var(--danger)">1,043 / 2,600 (40%) ✗</div></div>
+          <div class="okr-kr"><div class="okr-kname">Direct Mail Leads</div><div class="okr-kval" style="color:var(--danger)">10 / 338 (3%) ✗</div></div>
+        </div>
+        <div class="okr-block" style="border-color:rgba(255,159,67,0.2)">
+          <div class="okr-obj">🎯 O3 · 100 Deals to ARIP / 70% Pull-Through</div>
+          <div class="okr-kr"><div class="okr-kname">Deals In (ARIP)</div><div class="okr-kval" style="color:var(--warn)">86 / 100 (86%) ⚠</div></div>
+          <div class="okr-kr"><div class="okr-kname">Pull Through Rate</div><div class="okr-kval" style="color:var(--accent)">70.93% — On Target ✓</div></div>
+          <div class="okr-kr"><div class="okr-kname">Deals Out</div><div class="okr-kval" style="color:var(--accent)">61 / 86 ✓</div></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:9px;">
+        <div class="okr-block" style="border-color:rgba(255,71,87,0.2)">
+          <div class="okr-obj">🎯 O4 · Acquisition Volume</div>
+          <div class="okr-kr"><div class="okr-kname">Virtual Appts Set</div><div class="okr-kval" style="color:var(--danger)">739 / 1,300 (57%) ✗</div></div>
+          <div class="okr-kr"><div class="okr-kname">In-Person Appts Set</div><div class="okr-kval" style="color:var(--accent)">380 / 300 (127%) ✓</div></div>
+          <div class="okr-kr"><div class="okr-kname">Follow-Up Appts Set</div><div class="okr-kval" style="color:var(--accent)">833 / 403 (207%) ✓</div></div>
+          <div class="okr-kr"><div class="okr-kname">Appt Show Rate</div><div class="okr-kval" style="color:var(--warn)">61.9% vs 73% ⚠</div></div>
+          <div class="okr-kr"><div class="okr-kname">VP Missed Appts (should = 0)</div><div class="okr-kval" style="color:var(--danger)">21 ✗</div></div>
+        </div>
+        <div class="okr-block" style="border-color:rgba(255,71,87,0.2)">
+          <div class="okr-obj">🎯 O5 · Underwriting SLAs</div>
+          <div class="okr-kr"><div class="okr-kname">Avg Speed to UW</div><div class="okr-kval" style="color:var(--danger)">~33 hrs vs &lt;24 ✗</div></div>
+          <div class="okr-kr"><div class="okr-kname">Late UW Events</div><div class="okr-kval" style="color:var(--danger)">62 vs &lt;13 total ✗</div></div>
+          <div class="okr-kr"><div class="okr-kname">Deals Underwritten</div><div class="okr-kval" style="color:var(--text)">1,130</div></div>
+        </div>
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:9px;padding:14px 16px;">
+          <div class="p-title" style="margin-bottom:10px;">Q1 OKR Summary</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div style="text-align:center;padding:10px;background:rgba(0,200,150,0.07);border:1px solid rgba(0,200,150,0.18);border-radius:7px;">
+              <div style="font-family:'Bebas Neue';font-size:30px;color:var(--accent)">6</div>
+              <div style="font-size:9px;color:var(--muted);letter-spacing:0.8px;text-transform:uppercase;">On Track ✓</div>
+            </div>
+            <div style="text-align:center;padding:10px;background:rgba(255,71,87,0.07);border:1px solid rgba(255,71,87,0.18);border-radius:7px;">
+              <div style="font-family:'Bebas Neue';font-size:30px;color:var(--danger)">6</div>
+              <div style="font-size:9px;color:var(--muted);letter-spacing:0.8px;text-transform:uppercase;">Missed ✗</div>
+            </div>
+            <div style="text-align:center;padding:10px;background:rgba(255,159,67,0.07);border:1px solid rgba(255,159,67,0.18);border-radius:7px;">
+              <div style="font-family:'Bebas Neue';font-size:30px;color:var(--warn)">3</div>
+              <div style="font-size:9px;color:var(--muted);letter-spacing:0.8px;text-transform:uppercase;">Near Miss ⚠</div>
+            </div>
+            <div style="text-align:center;padding:10px;background:rgba(77,158,247,0.07);border:1px solid rgba(77,158,247,0.18);border-radius:7px;">
+              <div style="font-family:'Bebas Neue';font-size:30px;color:var(--blue)">111%</div>
+              <div style="font-size:9px;color:var(--muted);letter-spacing:0.8px;text-transform:uppercase;">Revenue vs Target</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ INSIGHTS ═══ -->
+  <div class="sec">
+    <div class="sec-head">
+      <span class="sec-label">Key Insights & Q2 Priorities</span>
+      <div class="sec-line"></div>
+    </div>
+    <div class="g2">
+      <div>
+        <div class="insight">
+          <div class="insight-t">💡 Revenue Beat — But Fee Size Needs Attention</div>
+          <div class="insight-b">Leverage Homes closed Q1 at $1,223,012 — 111% of the $1.1M target. However the average fee of $37,061 came in below the $40K goal. 13 of 33 deals closed same-quarter (15.12%), meaning 20 deals were sourced in prior quarters. The pipeline entering Q2 is $1,353,000 — healthy but dependent on UW and disposition execution. Call Center remains the dominant ARIP source at 50%.</div>
+        </div>
+        <div class="alert r">
+          <div class="ai">🔴</div>
+          <div class="at"><strong>Call Center at 40% of target (1,043 vs 2,600).</strong> Despite being Q1's #1 deal source, volume was cut more than in half. This is a direct risk to Q2 and Q3 ARIP volume. Prioritize dialer, list, and headcount review immediately.</div>
+        </div>
+        <div class="alert w">
+          <div class="ai">⚠</div>
+          <div class="at"><strong>Virtual show rate at 61.9% vs 73% target</strong> — 417 no-shows on 2,291 appointments. Each missed virtual = ~$37K in potential fee. A 10-point improvement in show rate = ~229 additional attended appointments per quarter.</div>
+        </div>
+        <div class="alert r">
+          <div class="ai">🔴</div>
+          <div class="at"><strong>21 VP-missed appointments.</strong> Per SOP, this should be zero. These are motivated sellers who had confirmed time with a closer. Implement hard calendar rules for in-person buffering and same-day confirmations from AMs.</div>
+        </div>
+      </div>
+      <div>
+        <div class="alert r">
+          <div class="ai">🔴</div>
+          <div class="at"><strong>62 late UW events — 5× the quarterly cap.</strong> Avg speed worsened from 23 hrs in January to 70 hrs by late March. VPs heading into appointments without complete UW is a direct conversion drag. Enforce 18-hr UW escalation in Q2.</div>
+        </div>
+        <div class="alert w">
+          <div class="ai">⚠</div>
+          <div class="at"><strong>Assignment disposition averaging ~89 days</strong> vs a 45-day target. Begin buyer outreach at deal review entry, not exit. Same-day pre-marketing cuts this cycle significantly.</div>
+        </div>
+        <div class="alert g">
+          <div class="ai">✅</div>
+          <div class="at"><strong>Pull-through hit 70.93%</strong> — exactly on target. Follow-up appointments at 207% of goal (833 vs 403). In-person at 127% of goal (380 vs 300). The follow-up and IP machines are working.</div>
+        </div>
+        <div class="insight insight-y">
+          <div class="insight-t">🎯 Q2 Priorities</div>
+          <div class="insight-b">
+            <strong style="color:var(--text)">1. Call Center Volume →</strong> 200+/wk. Audit dialer, list freshness, caller headcount.<br><br>
+            <strong style="color:var(--text)">2. Avg Fee Size →</strong> Push toward $40K+. Focus on higher-ICP properties and novation / fix-flip mix (already 50% of ARIP).<br><br>
+            <strong style="color:var(--text)">3. UW SLA →</strong> 18-hr escalation trigger. Weekly late-UW audit per underwriter.<br><br>
+            <strong style="color:var(--text)">4. Virtual Show Rate →</strong> Automated SMS + email at 24 hrs and 1 hr before. Target 73%+.<br><br>
+            <strong style="color:var(--text)">5. Q2 Pipeline ($1.35M) →</strong> Prioritize the 37 deals in Under Contract. Compress ARIP and disposition cycles to accelerate collection.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="footer-l">Leverage Homes · A Leverage Companies Company · Northern NJ Real Estate Acquisitions<br><span style="font-size:10px;margin-top:2px;display:block;">Revenue = Total Net Revenue (actual closed). Tests removed. IDs deduplicated. DealSignals excluded from active lead counts. Appts excl. Brian.</span></div>
+  <div class="footer-r">Source: Salesforce CRM · Homes Scorecard · Q1 Pipeline Summary<br>Q1: Jan 1 – Mar 31, 2026 · Generated: April 2, 2026</div>
+</div>
+
+<script>
+const weeks = ['01/04','01/11','01/18','01/25','02/01','02/08','02/15','02/22','03/01','03/08','03/15','03/22','03/29'];
+const revData = [56811,13000,7635,15375,8692,179697,66200,51166,31884,9850,106507,279957,0];
+const uwData  = [23,35,23,36,41,23,27,37,31,34,47,70,null];
+
+function buildBars(cId, lId, data, maxVal, colorFn) {
+  const bEl = document.getElementById(cId), lEl = document.getElementById(lId);
+  data.forEach((v, i) => {
+    const bar = document.createElement('div'); bar.className = 't-bar';
+    if (!v) { bar.style.height = '2px'; bar.style.background = 'var(--border)'; }
+    else {
+      bar.style.height = Math.max((v/maxVal)*100, 3) + '%';
+      bar.style.background = colorFn(v, i, data);
+    }
+    if (v) bar.title = `${weeks[i]}: ${v > 100 ? '$'+v.toLocaleString() : v+' hrs'}`;
+    bEl.appendChild(bar);
+    const lbl = document.createElement('div'); lbl.className = 't-lbl';
+    lbl.textContent = weeks[i].slice(0,5); lEl.appendChild(lbl);
+  });
+}
+
+const maxRev = Math.max(...revData);
+buildBars('rev-bars','rev-lbls', revData, maxRev, (v,i,arr) => {
+  const validArr = arr.filter(x=>x>0);
+  if (v === Math.max(...validArr)) return 'var(--accent)';
+  if (v === Math.min(...validArr)) return 'var(--danger)';
+  return 'rgba(0,200,150,0.3)';
+});
+
+buildBars('uw-bars','uw-lbls', uwData, 75, v => {
+  if (!v) return 'var(--border)';
+  if (v <= 24) return 'var(--accent)';
+  if (v <= 40) return 'var(--accent2)';
+  return 'var(--danger)';
+});
+</script>
+</body>
+</html>
