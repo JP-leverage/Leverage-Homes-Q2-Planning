@@ -605,23 +605,162 @@
     <div class="sec-head"><span class="sec-label">Lead Source — Full Performance Matrix</span><div class="sec-line"></div><span class="sec-note">Volume · Conv% · Appt mix · Attended→ARIP · Avg fee</span></div>
     <div class="g2">
       <div class="panel">
-        <div class="p-title">Lead Source × Attended→ARIP Rate (from appointment data)</div>
-        <table class="source-table">
+        <div class="p-title">Lead Source × Attended→ARIP Rate <span style="font-size:9px;color:var(--muted);font-weight:400;">— click any row to expand</span></div>
+        <style>
+          .src-row { cursor:pointer; transition:background 0.12s; border-radius:4px; }
+          .src-row:hover { background:rgba(255,255,255,0.03); }
+          .src-row.active { background:rgba(255,255,255,0.05); outline:1px solid rgba(255,255,255,0.08); }
+          .src-row td { padding:8px 8px; }
+          .spotlight { transition:opacity 0.18s ease, transform 0.18s ease; }
+          .spotlight.fading { opacity:0; transform:translateY(4px); }
+        </style>
+        <table class="source-table" id="src-table">
           <thead><tr><th>Source</th><th class="r">Attended</th><th class="r">ARIPs</th><th class="r">Att→ARIP</th><th class="r">IP%</th><th class="r">Closed</th><th class="r">Avg Fee</th></tr></thead>
           <tbody>
-            <tr><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:6px;"></span>Pay Per Lead</td><td class="r">23</td><td class="r" style="color:var(--accent)">6</td><td class="r" style="color:var(--accent)">26.1%</td><td class="r" style="color:var(--accent)">39%</td><td class="r">1</td><td class="r">$27,466</td></tr>
-            <tr><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--pink);margin-right:6px;"></span>Direct Mail</td><td class="r">41</td><td class="r" style="color:var(--accent)">9</td><td class="r" style="color:var(--accent)">22.0%</td><td class="r" style="color:var(--accent2)">22%</td><td class="r">3</td><td class="r" style="color:var(--accent)">$54,384</td></tr>
-            <tr><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent)margin-right:6px;"></span>Call Center</td><td class="r">840</td><td class="r" style="color:var(--accent)">78</td><td class="r" style="color:var(--accent2)">9.3%</td><td class="r">19%</td><td class="r" style="color:var(--accent)">11</td><td class="r" style="color:var(--accent)">$50,585</td></tr>
-            <tr><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--purple);margin-right:6px;"></span>Referral</td><td class="r">82</td><td class="r">6</td><td class="r">7.3%</td><td class="r">23%</td><td class="r">4</td><td class="r" style="color:var(--accent2)">$38,634</td></tr>
-            <tr><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent2);margin-right:6px;"></span>Text / SMS</td><td class="r">229</td><td class="r">15</td><td class="r">6.6%</td><td class="r">14%</td><td class="r">5</td><td class="r" style="color:var(--warn)">$29,300</td></tr>
-            <tr><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--teal);margin-right:6px;"></span>Internal CC</td><td class="r">108</td><td class="r">7</td><td class="r">6.5%</td><td class="r">22%</td><td class="r">2</td><td class="r">$23,060</td></tr>
-            <tr style="border-top:2px solid rgba(255,71,87,0.25);"><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--danger);margin-right:6px;"></span>D&amp;D / RPEC</td><td class="r">40</td><td class="r" style="color:var(--danger)">0</td><td class="r" style="color:var(--danger)">0.0%</td><td class="r" style="color:var(--danger)">12%</td><td class="r">3</td><td class="r" style="color:var(--danger)">$20,399</td></tr>
+            <tr class="src-row" onclick="showSpotlight('ppl')" data-key="ppl"><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:6px;vertical-align:middle;"></span>Pay Per Lead</td><td class="r">23</td><td class="r" style="color:var(--accent)">6</td><td class="r" style="color:var(--accent)">26.1%</td><td class="r" style="color:var(--accent)">39%</td><td class="r">1</td><td class="r">$27,466</td></tr>
+            <tr class="src-row active" onclick="showSpotlight('dm')" data-key="dm"><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--pink);margin-right:6px;vertical-align:middle;"></span>Direct Mail</td><td class="r">41</td><td class="r" style="color:var(--accent)">9</td><td class="r" style="color:var(--accent)">22.0%</td><td class="r" style="color:var(--accent2)">22%</td><td class="r">3</td><td class="r" style="color:var(--accent)">$54,384</td></tr>
+            <tr class="src-row" onclick="showSpotlight('cc')" data-key="cc"><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--teal);margin-right:6px;vertical-align:middle;"></span>Call Center</td><td class="r">840</td><td class="r" style="color:var(--accent)">78</td><td class="r" style="color:var(--accent2)">9.3%</td><td class="r">19%</td><td class="r" style="color:var(--accent)">11</td><td class="r" style="color:var(--accent)">$50,585</td></tr>
+            <tr class="src-row" onclick="showSpotlight('ref')" data-key="ref"><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--purple);margin-right:6px;vertical-align:middle;"></span>Referral</td><td class="r">82</td><td class="r">6</td><td class="r">7.3%</td><td class="r">23%</td><td class="r">4</td><td class="r" style="color:var(--accent2)">$38,634</td></tr>
+            <tr class="src-row" onclick="showSpotlight('txt')" data-key="txt"><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent2);margin-right:6px;vertical-align:middle;"></span>Text / SMS</td><td class="r">229</td><td class="r">15</td><td class="r">6.6%</td><td class="r">14%</td><td class="r">5</td><td class="r" style="color:var(--warn)">$29,300</td></tr>
+            <tr class="src-row" onclick="showSpotlight('icc')" data-key="icc"><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--blue);margin-right:6px;vertical-align:middle;"></span>Internal CC</td><td class="r">108</td><td class="r">7</td><td class="r">6.5%</td><td class="r">22%</td><td class="r">2</td><td class="r">$23,060</td></tr>
+            <tr class="src-row" onclick="showSpotlight('dnd')" data-key="dnd" style="border-top:2px solid rgba(255,71,87,0.2);"><td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--danger);margin-right:6px;vertical-align:middle;"></span>D&amp;D / RPEC</td><td class="r">40</td><td class="r" style="color:var(--danger)">0</td><td class="r" style="color:var(--danger)">0.0%</td><td class="r" style="color:var(--danger)">12%</td><td class="r">3</td><td class="r" style="color:var(--danger)">$20,399</td></tr>
           </tbody>
         </table>
-        <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;">
-          <div class="alert r" style="margin-bottom:0;"><div class="ai">🔴</div><div class="at"><strong>D&D/RPEC: 0 ARIPs from 40 attended appointments.</strong> 3 deals closed, likely from prior pipeline. This channel produces sellers who won't accept off-market pricing. 68% follow-up rate suggests repeated re-engagement with zero conversion.</div></div>
-          <div class="alert g" style="margin-bottom:0;"><div class="ai">✅</div><div class="at"><strong>PPL at 26.1% attended→ARIP is the highest quality source in Q1</strong> — 39% In-Person rate self-selects high-intent sellers. Severely underutilized at only 52 leads all quarter.</div></div>
-        </div>
+
+        <!-- INTERACTIVE SPOTLIGHT TILE -->
+        <div id="src-spotlight" class="spotlight" style="margin-top:11px;border-radius:10px;padding:14px 16px;border:1px solid rgba(253,121,168,0.25);background:linear-gradient(135deg,rgba(253,121,168,0.07),rgba(253,121,168,0.02));"></div>
+
+        <script>
+        const srcData = {
+          ppl: {
+            name:'Pay Per Lead', color:'#00c896', glow:'rgba(0,200,150,',
+            leads:'52', leadsSub:'vs target',
+            attended:'23', attendedSub:'appts',
+            arip:'26.1%', aripSub:'#1 rate',
+            closes:'1', closesSub:'closed',
+            fee:'$27,466', feeSub:'avg fee',
+            insight:'<strong style="color:#dde4f0">Highest attended→ARIP rate (26.1%)</strong> with 39% In-Person mix. Only 52 leads all quarter — yet 6 ARIPs. Severely underutilized. Scaling PPL investment to 200+ leads/qtr at this conversion rate would materially change the ARIP pipeline.',
+            badge:'#1 ARIP Rate', badgeColor:'#00c896'
+          },
+          dm: {
+            name:'Direct Mail', color:'#fd79a8', glow:'rgba(253,121,168,',
+            leads:'10', leadsSub:'vs 338 target',
+            attended:'41', attendedSub:'appts',
+            arip:'22.0%', aripSub:'#2 rate',
+            closes:'3', closesSub:'closed',
+            fee:'$54,384', feeSub:'#1 avg fee',
+            insight:'<strong style="color:#dde4f0">The most underleveraged channel in Q1.</strong> Only 10 leads (3% of a 338 target) but 22% attended→ARIP and the highest avg closed fee of any source. Restart DM to 100 leads/qtr: ~40 attended → ~9 ARIPs → ~3–4 closes at $54K avg = <strong style="color:#fd79a8">~$162–216K additional revenue</strong> per quarter.',
+            badge:'#1 Avg Fee', badgeColor:'#fd79a8'
+          },
+          cc: {
+            name:'Call Center', color:'#00b4d8', glow:'rgba(0,180,216,',
+            leads:'1,043', leadsSub:'vs 2,600 target',
+            attended:'840', attendedSub:'appts — most volume',
+            arip:'9.3%', aripSub:'78 ARIPs',
+            closes:'11', closesSub:'closed',
+            fee:'$50,585', feeSub:'avg fee',
+            insight:'<strong style="color:#dde4f0">Volume king — 78 ARIPs, 11 closes, $50K avg fee.</strong> But volume was only 40% of the 2,600 lead target. Call Center is the #1 ARIP source by count. Restoring to 200+ leads/wk is the single most important marketing action for Q2 pipeline health.',
+            badge:'Most ARIPs', badgeColor:'#00b4d8'
+          },
+          ref: {
+            name:'Referral', color:'#a29bfe', glow:'rgba(162,155,254,',
+            leads:'~105', leadsSub:'unscalable',
+            attended:'82', attendedSub:'appts',
+            arip:'7.3%', aripSub:'6 ARIPs',
+            closes:'4', closesSub:'closed',
+            fee:'$38,634', feeSub:'avg fee',
+            insight:'<strong style="color:#dde4f0">High-quality, low-volume.</strong> 23% In-Person rate, $38.6K avg fee. Referrals can\'t be forced but can be cultivated — closed sellers referring neighbors, agent relationships, attorney networks. Build a formal referral program to grow this channel systematically.',
+            badge:'High Quality', badgeColor:'#a29bfe'
+          },
+          txt: {
+            name:'Text / SMS', color:'#e8c547', glow:'rgba(232,197,71,',
+            leads:'907', leadsSub:'vs 650 target ✓',
+            attended:'229', attendedSub:'appts',
+            arip:'6.6%', aripSub:'15 ARIPs',
+            closes:'5', closesSub:'closed',
+            fee:'$29,300', feeSub:'avg fee',
+            insight:'<strong style="color:#dde4f0">Volume above target (139%) but lowest avg fee at $29.3K.</strong> Text leads self-select toward lighter equity situations. 14% In-Person rate is the lowest of any active channel. To improve fees from text leads, push more of the ICP 5+ deals into In-Person appointments — currently being undersold virtually.',
+            badge:'139% Volume', badgeColor:'#e8c547'
+          },
+          icc: {
+            name:'Internal Call Center', color:'#4d9ef7', glow:'rgba(77,158,247,',
+            leads:'~44', leadsSub:'small sample',
+            attended:'108', attendedSub:'appts',
+            arip:'6.5%', aripSub:'7 ARIPs',
+            closes:'2', closesSub:'closed',
+            fee:'$23,060', feeSub:'avg fee',
+            insight:'<strong style="color:#dde4f0">90% lead-to-opportunity conversion rate</strong> — highest of any source. Small volume but highly qualified intake. Internal CC leads go deeper into the funnel faster. Average closed fee ($23K) is modest, suggesting these are often smaller equity situations or junior deal structures. Worth tracking separately as the team scales.',
+            badge:'90% Conv%', badgeColor:'#4d9ef7'
+          },
+          dnd: {
+            name:'D&D / RPEC', color:'#ff4757', glow:'rgba(255,71,87,',
+            leads:'~35', leadsSub:'channel',
+            attended:'40', attendedSub:'appts',
+            arip:'0.0%', aripSub:'0 ARIPs',
+            closes:'3', closesSub:'from prior pipeline',
+            fee:'$20,399', feeSub:'avg fee',
+            insight:'<strong style="color:#ff4757">Zero ARIPs from 40 attended appointments.</strong> 68% follow-up rate (highest of any source) with zero conversion — the team keeps re-engaging sellers who won\'t accept off-market pricing. The 3 closes came from prior pipeline, not Q1 meetings. Recommend: either restructure how D&D sellers are approached (novation framing, retail-adjacent offer) or formally sunset this channel.',
+            badge:'⚠ 0 ARIPs', badgeColor:'#ff4757'
+          }
+        };
+
+        function showSpotlight(key) {
+          const d = srcData[key];
+          const spot = document.getElementById('src-spotlight');
+
+          // highlight row
+          document.querySelectorAll('.src-row').forEach(r => r.classList.remove('active'));
+          document.querySelector(`[data-key="${key}"]`).classList.add('active');
+
+          // fade out
+          spot.classList.add('fading');
+          setTimeout(() => {
+            const rgb = d.glow;
+            spot.style.background = `linear-gradient(135deg,${rgb}0.07),${rgb}0.02))`;
+            spot.style.borderColor = `${rgb}0.3)`;
+            spot.innerHTML = `
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="width:8px;height:8px;border-radius:50%;background:${d.color};display:inline-block;"></span>
+                  <div style="font-size:10px;color:#4f5a6e;text-transform:uppercase;letter-spacing:1.2px;font-weight:600;">${d.name}</div>
+                </div>
+                <div style="font-size:10px;font-weight:700;font-family:'DM Mono';padding:2px 9px;border-radius:4px;background:${rgb}0.12);color:${d.color};">${d.badge}</div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px;">
+                <div style="text-align:center;background:#161b22;border-radius:7px;padding:10px 6px;">
+                  <div style="font-size:9px;color:#4f5a6e;text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Q1 Leads</div>
+                  <div style="font-family:'Bebas Neue';font-size:26px;color:#dde4f0;">${d.leads}</div>
+                  <div style="font-size:9px;color:#4f5a6e;">${d.leadsSub}</div>
+                </div>
+                <div style="text-align:center;background:#161b22;border-radius:7px;padding:10px 6px;">
+                  <div style="font-size:9px;color:#4f5a6e;text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Attended</div>
+                  <div style="font-family:'Bebas Neue';font-size:26px;color:#dde4f0;">${d.attended}</div>
+                  <div style="font-size:9px;color:#4f5a6e;">${d.attendedSub}</div>
+                </div>
+                <div style="text-align:center;background:#161b22;border-radius:7px;padding:10px 6px;">
+                  <div style="font-size:9px;color:#4f5a6e;text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Att→ARIP</div>
+                  <div style="font-family:'Bebas Neue';font-size:26px;color:${d.color};">${d.arip}</div>
+                  <div style="font-size:9px;color:${d.color};">${d.aripSub}</div>
+                </div>
+                <div style="text-align:center;background:#161b22;border-radius:7px;padding:10px 6px;">
+                  <div style="font-size:9px;color:#4f5a6e;text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Closes</div>
+                  <div style="font-family:'Bebas Neue';font-size:26px;color:#dde4f0;">${d.closes}</div>
+                  <div style="font-size:9px;color:#4f5a6e;">${d.closesSub}</div>
+                </div>
+                <div style="text-align:center;background:${rgb}0.08);border:1px solid ${rgb}0.25);border-radius:7px;padding:10px 6px;">
+                  <div style="font-size:9px;color:#4f5a6e;text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;">Avg Fee</div>
+                  <div style="font-family:'Bebas Neue';font-size:26px;color:${d.color};">${d.fee}</div>
+                  <div style="font-size:9px;color:${d.color};">${d.feeSub}</div>
+                </div>
+              </div>
+              <div style="font-size:11px;color:#7f8ea8;line-height:1.75;">${d.insight}</div>`;
+            spot.classList.remove('fading');
+          }, 180);
+        }
+
+        // Init with Direct Mail selected
+        showSpotlight('dm');
+        </script>
       </div>
 
       <div class="panel">
